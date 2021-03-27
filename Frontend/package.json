@@ -1,5 +1,7 @@
 {
   "dependencies": {
-    "cra-template": "^1.1.2"
+    "cra-template": "^1.1.2",
+    "firebase": "^7.24.0",
+    "react-firebaseui": "^4.1.0"
   }
 }

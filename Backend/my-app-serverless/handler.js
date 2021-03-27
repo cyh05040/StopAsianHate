@@ -1,11 +1,16 @@
 'use strict';
 
 module.exports.hello = async (event) => {
+  if (event.path == '/whoami' && event.httpMethod === 'GET'){
+    return {
+      statusCode: 200,
+      body: JSON.stringify({username: 'yc2645 Eric Chen is the best'})
+    }
+  }
   return {
     statusCode: 200,
     body: JSON.stringify(
       {
-        message: 'Go Serverless v1.0! Your function executed successfully!',
         input: event,
       },
       null,
