@@ -52,6 +52,7 @@ provider:
 # you can add packaging information here
 #package:
 #  include:
+#    - node_modules/
 #    - include-me.js
 #    - include-me-dir/**
 #  exclude:
@@ -66,11 +67,18 @@ functions:
 #    Check the event documentation for details
     events:
       - http:
-          path: whoami
-          method: post
+          path: /
+          method: ANY
       - http:
-          path: whoami
-          method: get
+          path: /{proxy+}
+          method: ANY
+
+  # - http:
+  #     path: whoami
+  #     method: post
+  # - http:
+  #     path: whoami
+  #     method: get
 
 #    events:
 #      - httpApi:

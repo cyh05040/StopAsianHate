@@ -207,7 +207,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/my-app-serverless/dev/1616297856933-2021-03-21T03:37:36.933Z/my-app-serverless.zip"
+          "S3Key": "serverless/my-app-serverless/dev/1616634752010-2021-03-25T01:12:32.010Z/my-app-serverless.zip"
         },
         "Handler": "s_hello.handler",
         "Runtime": "nodejs12.x",
@@ -225,14 +225,14 @@
         "HelloLogGroup"
       ]
     },
-    "HelloLambdaVersionDZtmw42CN2ZkasIVEwIx0np3lK8CUIIGjdPqJPGjiYc": {
+    "HelloLambdaVersionMS73FV9Ch87fPG2ILiVFSTQF2ZsNXwCeAvldKSYDWc": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "HelloLambdaFunction"
         },
-        "CodeSha256": "p0qjPomLud8dZJohfHPRJm/oXzu9uiy2QRuqy03NJWE="
+        "CodeSha256": "KDzR2p5UIq/Qt0Pg5UepiRVN0cdkevLTSWSmpeWCWVw="
       }
     },
     "ApiGatewayRestApi": {
@@ -247,7 +247,7 @@
         "Policy": ""
       }
     },
-    "ApiGatewayResourceWhoami": {
+    "ApiGatewayResourceProxyVar": {
       "Type": "AWS::ApiGateway::Resource",
       "Properties": {
         "ParentId": {
@@ -256,19 +256,22 @@
             "RootResourceId"
           ]
         },
-        "PathPart": "whoami",
+        "PathPart": "{proxy+}",
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
         }
       }
     },
-    "ApiGatewayMethodWhoamiPost": {
+    "ApiGatewayMethodAny": {
       "Type": "AWS::ApiGateway::Method",
       "Properties": {
-        "HttpMethod": "POST",
+        "HttpMethod": "ANY",
         "RequestParameters": {},
         "ResourceId": {
-          "Ref": "ApiGatewayResourceWhoami"
+          "Fn::GetAtt": [
+            "ApiGatewayRestApi",
+            "RootResourceId"
+          ]
         },
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
@@ -305,13 +308,13 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayMethodWhoamiGet": {
+    "ApiGatewayMethodProxyVarAny": {
       "Type": "AWS::ApiGateway::Method",
       "Properties": {
-        "HttpMethod": "GET",
+        "HttpMethod": "ANY",
         "RequestParameters": {},
         "ResourceId": {
-          "Ref": "ApiGatewayResourceWhoami"
+          "Ref": "ApiGatewayResourceProxyVar"
         },
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
@@ -348,7 +351,7 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1616297844151": {
+    "ApiGatewayDeployment1616634736376": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -357,8 +360,8 @@
         "StageName": "dev"
       },
       "DependsOn": [
-        "ApiGatewayMethodWhoamiPost",
-        "ApiGatewayMethodWhoamiGet"
+        "ApiGatewayMethodAny",
+        "ApiGatewayMethodProxyVarAny"
       ]
     },
     "HelloLambdaPermissionApiGateway": {
@@ -507,7 +510,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/my-app-serverless/dev/1616297856933-2021-03-21T03:37:36.933Z/custom-resources.zip"
+          "S3Key": "serverless/my-app-serverless/dev/1616634752010-2021-03-25T01:12:32.010Z/custom-resources.zip"
         },
         "FunctionName": "my-app-serverless-dev-custom-resource-apigw-cw-role",
         "Handler": "apiGatewayCloudWatchRole/handler.handler",
@@ -563,7 +566,7 @@
     "HelloLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "HelloLambdaVersionDZtmw42CN2ZkasIVEwIx0np3lK8CUIIGjdPqJPGjiYc"
+        "Ref": "HelloLambdaVersionMS73FV9Ch87fPG2ILiVFSTQF2ZsNXwCeAvldKSYDWc"
       }
     },
     "ServiceEndpoint": {
