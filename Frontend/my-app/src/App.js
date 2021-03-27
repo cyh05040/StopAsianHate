@@ -44,6 +44,7 @@ class SignInScreen extends React.Component {
     this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(
         (user) => this.setState({isSignedIn: !!user})
     );
+
   }
   
   // Make sure we un-register Firebase observers when the component unmounts.
@@ -55,16 +56,17 @@ class SignInScreen extends React.Component {
     if (!this.state.isSignedIn) {
       return (
         <div>
-          {/* <h1>My App</h1>
-          <p>Please sign-in:</p> */}
           <StyledFirebaseAuth uiCallback={ui => ui.disableAutoSignIn()} uiConfig={this.uiConfig} firebaseAuth={firebase.auth()}/>
         </div>
       );
     }
     return (
       <div>
-        <h1>My App</h1>
         <p>Welcome {firebase.auth().currentUser.displayName}! You are now signed-in!</p>
+        <p>Your email is {firebase.auth().currentUser.email}</p>
+        <p>Your token is {this.state.data}</p>
+
+
         <a onClick={() => firebase.auth().signOut()}>Sign-out</a>
       </div>
     );
