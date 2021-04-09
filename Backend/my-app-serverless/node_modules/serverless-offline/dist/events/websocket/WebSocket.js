@@ -21,6 +21,10 @@ var id = 0;
 
 function _classPrivateFieldLooseKey(name) { return "__private_" + id++ + "_" + name; }
 
+var _httpServer = _classPrivateFieldLooseKey("httpServer");
+
+var _webSocketServer = _classPrivateFieldLooseKey("webSocketServer");
+
 class WebSocket {
   constructor(serverless, options, lambda) {
     Object.defineProperty(this, _httpServer, {
@@ -64,7 +68,3 @@ class WebSocket {
 }
 
 exports.default = WebSocket;
-
-var _httpServer = _classPrivateFieldLooseKey("httpServer");
-
-var _webSocketServer = _classPrivateFieldLooseKey("webSocketServer");

@@ -18,6 +18,10 @@ function _classPrivateFieldLooseKey(name) { return "__private_" + id++ + "_" + n
 // eslint-disable-line import/no-unresolved
 const workerThreadHelperPath = (0, _path.resolve)(__dirname, './workerThreadHelper.js');
 
+var _workerThread = _classPrivateFieldLooseKey("workerThread");
+
+var _allowCache = _classPrivateFieldLooseKey("allowCache");
+
 class WorkerThreadRunner {
   constructor(funOptions
   /* options */
@@ -86,7 +90,3 @@ class WorkerThreadRunner {
 }
 
 exports.default = WorkerThreadRunner;
-
-var _workerThread = _classPrivateFieldLooseKey("workerThread");
-
-var _allowCache = _classPrivateFieldLooseKey("allowCache");

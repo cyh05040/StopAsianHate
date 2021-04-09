@@ -19,6 +19,12 @@ var id = 0;
 
 function _classPrivateFieldLooseKey(name) { return "__private_" + id++ + "_" + name; }
 
+var _options = _classPrivateFieldLooseKey("options");
+
+var _server = _classPrivateFieldLooseKey("server");
+
+var _webSocketClients = _classPrivateFieldLooseKey("webSocketClients");
+
 class HttpServer {
   constructor(options, webSocketClients) {
     Object.defineProperty(this, _options, {
@@ -87,9 +93,3 @@ class HttpServer {
 }
 
 exports.default = HttpServer;
-
-var _options = _classPrivateFieldLooseKey("options");
-
-var _server = _classPrivateFieldLooseKey("server");
-
-var _webSocketClients = _classPrivateFieldLooseKey("webSocketClients");

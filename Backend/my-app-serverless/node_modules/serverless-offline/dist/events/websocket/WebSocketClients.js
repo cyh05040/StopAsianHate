@@ -30,6 +30,20 @@ const {
   stringify
 } = JSON;
 
+var _clients = _classPrivateFieldLooseKey("clients");
+
+var _lambda = _classPrivateFieldLooseKey("lambda");
+
+var _options = _classPrivateFieldLooseKey("options");
+
+var _webSocketRoutes = _classPrivateFieldLooseKey("webSocketRoutes");
+
+var _websocketsApiRouteSelectionExpression = _classPrivateFieldLooseKey("websocketsApiRouteSelectionExpression");
+
+var _idleTimeouts = _classPrivateFieldLooseKey("idleTimeouts");
+
+var _hardTimeouts = _classPrivateFieldLooseKey("hardTimeouts");
+
 class WebSocketClients {
   constructor(serverless, options, lambda) {
     Object.defineProperty(this, _clients, {
@@ -253,17 +267,3 @@ class WebSocketClients {
 }
 
 exports.default = WebSocketClients;
-
-var _clients = _classPrivateFieldLooseKey("clients");
-
-var _lambda = _classPrivateFieldLooseKey("lambda");
-
-var _options = _classPrivateFieldLooseKey("options");
-
-var _webSocketRoutes = _classPrivateFieldLooseKey("webSocketRoutes");
-
-var _websocketsApiRouteSelectionExpression = _classPrivateFieldLooseKey("websocketsApiRouteSelectionExpression");
-
-var _idleTimeouts = _classPrivateFieldLooseKey("idleTimeouts");
-
-var _hardTimeouts = _classPrivateFieldLooseKey("hardTimeouts");

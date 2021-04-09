@@ -19,6 +19,8 @@ var id = 0;
 
 function _classPrivateFieldLooseKey(name) { return "__private_" + id++ + "_" + name; }
 
+var _imageNameTag = _classPrivateFieldLooseKey("imageNameTag");
+
 class DockerImage {
   constructor(imageNameTag) {
     Object.defineProperty(this, _imageNameTag, {
@@ -46,7 +48,4 @@ class DockerImage {
 }
 
 exports.default = DockerImage;
-
-var _imageNameTag = _classPrivateFieldLooseKey("imageNameTag");
-
 DockerImage._memoizedPull = (0, _pMemoize.default)(DockerImage._pullImage);

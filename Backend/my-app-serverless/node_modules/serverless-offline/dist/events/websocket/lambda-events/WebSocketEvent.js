@@ -15,6 +15,12 @@ var id = 0;
 
 function _classPrivateFieldLooseKey(name) { return "__private_" + id++ + "_" + name; }
 
+var _connectionId = _classPrivateFieldLooseKey("connectionId");
+
+var _payload = _classPrivateFieldLooseKey("payload");
+
+var _route = _classPrivateFieldLooseKey("route");
+
 class WebSocketEvent {
   constructor(connectionId, route, payload) {
     Object.defineProperty(this, _connectionId, {
@@ -46,9 +52,3 @@ class WebSocketEvent {
 }
 
 exports.default = WebSocketEvent;
-
-var _connectionId = _classPrivateFieldLooseKey("connectionId");
-
-var _payload = _classPrivateFieldLooseKey("payload");
-
-var _route = _classPrivateFieldLooseKey("route");

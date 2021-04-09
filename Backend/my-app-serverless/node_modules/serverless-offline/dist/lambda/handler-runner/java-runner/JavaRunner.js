@@ -27,6 +27,16 @@ const {
   has
 } = Reflect;
 
+var _env = _classPrivateFieldLooseKey("env");
+
+var _functionName = _classPrivateFieldLooseKey("functionName");
+
+var _handler = _classPrivateFieldLooseKey("handler");
+
+var _deployPackage = _classPrivateFieldLooseKey("deployPackage");
+
+var _allowCache = _classPrivateFieldLooseKey("allowCache");
+
 class JavaRunner {
   constructor(funOptions, env, allowCache) {
     Object.defineProperty(this, _env, {
@@ -72,8 +82,8 @@ class JavaRunner {
 
       try {
         json = parse(item); // nope, it's not JSON
-      } catch (err) {} // no-op
-      // now let's see if we have a property __offline_payload__
+      } catch (err) {// no-op
+      } // now let's see if we have a property __offline_payload__
 
 
       if (json && typeof json === 'object' && has(json, '__offline_payload__')) {
@@ -128,13 +138,3 @@ class JavaRunner {
 }
 
 exports.default = JavaRunner;
-
-var _env = _classPrivateFieldLooseKey("env");
-
-var _functionName = _classPrivateFieldLooseKey("functionName");
-
-var _handler = _classPrivateFieldLooseKey("handler");
-
-var _deployPackage = _classPrivateFieldLooseKey("deployPackage");
-
-var _allowCache = _classPrivateFieldLooseKey("allowCache");

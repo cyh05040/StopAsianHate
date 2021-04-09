@@ -17,6 +17,18 @@ function _classPrivateFieldLooseKey(name) { return "__private_" + id++ + "_" + n
 
 const childProcessHelperPath = (0, _path.resolve)(__dirname, 'childProcessHelper.js');
 
+var _env = _classPrivateFieldLooseKey("env");
+
+var _functionKey = _classPrivateFieldLooseKey("functionKey");
+
+var _handlerName = _classPrivateFieldLooseKey("handlerName");
+
+var _handlerPath = _classPrivateFieldLooseKey("handlerPath");
+
+var _timeout = _classPrivateFieldLooseKey("timeout");
+
+var _allowCache = _classPrivateFieldLooseKey("allowCache");
+
 class ChildProcessRunner {
   constructor(funOptions, env, allowCache) {
     Object.defineProperty(this, _env, {
@@ -92,15 +104,3 @@ class ChildProcessRunner {
 }
 
 exports.default = ChildProcessRunner;
-
-var _env = _classPrivateFieldLooseKey("env");
-
-var _functionKey = _classPrivateFieldLooseKey("functionKey");
-
-var _handlerName = _classPrivateFieldLooseKey("handlerName");
-
-var _handlerPath = _classPrivateFieldLooseKey("handlerPath");
-
-var _timeout = _classPrivateFieldLooseKey("timeout");
-
-var _allowCache = _classPrivateFieldLooseKey("allowCache");

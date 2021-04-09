@@ -18,7 +18,7 @@ class OfflineEndpoint {
       },
       responses: {
         default: {
-          '400': {
+          400: {
             statusCode: '400'
           },
           responseModels: {

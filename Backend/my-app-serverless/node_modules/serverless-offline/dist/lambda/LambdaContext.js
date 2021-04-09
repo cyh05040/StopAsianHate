@@ -11,6 +11,8 @@ var id = 0;
 
 function _classPrivateFieldLooseKey(name) { return "__private_" + id++ + "_" + name; }
 
+var _context = _classPrivateFieldLooseKey("context");
+
 // class for creating a LambdaContext
 // http://docs.aws.amazon.com/lambda/latest/dg/nodejs-prog-model-context.html
 class LambdaContext {
@@ -49,5 +51,3 @@ class LambdaContext {
 }
 
 exports.default = LambdaContext;
-
-var _context = _classPrivateFieldLooseKey("context");

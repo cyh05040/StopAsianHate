@@ -17,6 +17,8 @@ var id = 0;
 
 function _classPrivateFieldLooseKey(name) { return "__private_" + id++ + "_" + name; }
 
+var _httpServer = _classPrivateFieldLooseKey("httpServer");
+
 class Http {
   constructor(serverless, options, lambda) {
     Object.defineProperty(this, _httpServer, {
@@ -73,5 +75,3 @@ class Http {
 }
 
 exports.default = Http;
-
-var _httpServer = _classPrivateFieldLooseKey("httpServer");

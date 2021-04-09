@@ -11,6 +11,8 @@ var id = 0;
 
 function _classPrivateFieldLooseKey(name) { return "__private_" + id++ + "_" + name; }
 
+var _webSocketClients = _classPrivateFieldLooseKey("webSocketClients");
+
 class ConnectionsController {
   constructor(webSocketClients) {
     Object.defineProperty(this, _webSocketClients, {
@@ -41,5 +43,3 @@ class ConnectionsController {
 }
 
 exports.default = ConnectionsController;
-
-var _webSocketClients = _classPrivateFieldLooseKey("webSocketClients");

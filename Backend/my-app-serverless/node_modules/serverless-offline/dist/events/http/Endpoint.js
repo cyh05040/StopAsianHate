@@ -41,6 +41,10 @@ function getResponseContentType(fep) {
   return 'application/json';
 }
 
+var _handlerPath = _classPrivateFieldLooseKey("handlerPath");
+
+var _http = _classPrivateFieldLooseKey("http");
+
 class Endpoint {
   constructor(handlerPath, http) {
     Object.defineProperty(this, _handlerPath, {
@@ -147,7 +151,3 @@ class Endpoint {
 }
 
 exports.default = Endpoint;
-
-var _handlerPath = _classPrivateFieldLooseKey("handlerPath");
-
-var _http = _classPrivateFieldLooseKey("http");

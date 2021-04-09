@@ -24,6 +24,10 @@ const {
   stringify
 } = JSON;
 
+var _lambda = _classPrivateFieldLooseKey("lambda");
+
+var _region = _classPrivateFieldLooseKey("region");
+
 class Schedule {
   constructor(lambda, region) {
     Object.defineProperty(this, _lambda, {
@@ -132,7 +136,3 @@ class Schedule {
 }
 
 exports.default = Schedule;
-
-var _lambda = _classPrivateFieldLooseKey("lambda");
-
-var _region = _classPrivateFieldLooseKey("region");

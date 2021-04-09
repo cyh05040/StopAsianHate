@@ -17,6 +17,16 @@ var id = 0;
 
 function _classPrivateFieldLooseKey(name) { return "__private_" + id++ + "_" + name; }
 
+var _connectionId = _classPrivateFieldLooseKey("connectionId");
+
+var _httpsProtocol = _classPrivateFieldLooseKey("httpsProtocol");
+
+var _rawHeaders = _classPrivateFieldLooseKey("rawHeaders");
+
+var _url = _classPrivateFieldLooseKey("url");
+
+var _websocketPort = _classPrivateFieldLooseKey("websocketPort");
+
 class WebSocketConnectEvent {
   constructor(connectionId, request, options) {
     Object.defineProperty(this, _connectionId, {
@@ -89,13 +99,3 @@ class WebSocketConnectEvent {
 }
 
 exports.default = WebSocketConnectEvent;
-
-var _connectionId = _classPrivateFieldLooseKey("connectionId");
-
-var _httpsProtocol = _classPrivateFieldLooseKey("httpsProtocol");
-
-var _rawHeaders = _classPrivateFieldLooseKey("rawHeaders");
-
-var _url = _classPrivateFieldLooseKey("url");
-
-var _websocketPort = _classPrivateFieldLooseKey("websocketPort");

@@ -15,6 +15,14 @@ var id = 0;
 
 function _classPrivateFieldLooseKey(name) { return "__private_" + id++ + "_" + name; }
 
+var _options = _classPrivateFieldLooseKey("options");
+
+var _pool = _classPrivateFieldLooseKey("pool");
+
+var _serverless = _classPrivateFieldLooseKey("serverless");
+
+var _timerRef = _classPrivateFieldLooseKey("timerRef");
+
 class LambdaFunctionPool {
   constructor(serverless, options) {
     Object.defineProperty(this, _options, {
@@ -116,11 +124,3 @@ class LambdaFunctionPool {
 }
 
 exports.default = LambdaFunctionPool;
-
-var _options = _classPrivateFieldLooseKey("options");
-
-var _pool = _classPrivateFieldLooseKey("pool");
-
-var _serverless = _classPrivateFieldLooseKey("serverless");
-
-var _timerRef = _classPrivateFieldLooseKey("timerRef");

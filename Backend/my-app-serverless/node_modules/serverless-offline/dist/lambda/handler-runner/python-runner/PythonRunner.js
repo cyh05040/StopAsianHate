@@ -34,6 +34,16 @@ const {
   has
 } = Reflect;
 
+var _env = _classPrivateFieldLooseKey("env");
+
+var _handlerName = _classPrivateFieldLooseKey("handlerName");
+
+var _handlerPath = _classPrivateFieldLooseKey("handlerPath");
+
+var _runtime = _classPrivateFieldLooseKey("runtime");
+
+var _allowCache = _classPrivateFieldLooseKey("allowCache");
+
 class PythonRunner {
   constructor(funOptions, env, allowCache) {
     Object.defineProperty(this, _env, {
@@ -96,8 +106,8 @@ class PythonRunner {
 
       try {
         json = parse(item); // nope, it's not JSON
-      } catch (err) {} // no-op
-      // now let's see if we have a property __offline_payload__
+      } catch (err) {// no-op
+      } // now let's see if we have a property __offline_payload__
 
 
       if (json && typeof json === 'object' && has(json, '__offline_payload__')) {
@@ -155,13 +165,3 @@ class PythonRunner {
 }
 
 exports.default = PythonRunner;
-
-var _env = _classPrivateFieldLooseKey("env");
-
-var _handlerName = _classPrivateFieldLooseKey("handlerName");
-
-var _handlerPath = _classPrivateFieldLooseKey("handlerPath");
-
-var _runtime = _classPrivateFieldLooseKey("runtime");
-
-var _allowCache = _classPrivateFieldLooseKey("allowCache");

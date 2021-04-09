@@ -53,6 +53,14 @@ function escapeJavaScript(x) {
 */
 
 
+var _path = _classPrivateFieldLooseKey("path");
+
+var _payload = _classPrivateFieldLooseKey("payload");
+
+var _request = _classPrivateFieldLooseKey("request");
+
+var _stage = _classPrivateFieldLooseKey("stage");
+
 class VelocityContext {
   constructor(request, stage, payload, path) {
     Object.defineProperty(this, _path, {
@@ -158,11 +166,3 @@ class VelocityContext {
 }
 
 exports.default = VelocityContext;
-
-var _path = _classPrivateFieldLooseKey("path");
-
-var _payload = _classPrivateFieldLooseKey("payload");
-
-var _request = _classPrivateFieldLooseKey("request");
-
-var _stage = _classPrivateFieldLooseKey("stage");

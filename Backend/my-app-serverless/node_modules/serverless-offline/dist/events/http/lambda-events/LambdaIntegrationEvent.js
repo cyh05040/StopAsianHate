@@ -17,6 +17,14 @@ var id = 0;
 
 function _classPrivateFieldLooseKey(name) { return "__private_" + id++ + "_" + name; }
 
+var _path = _classPrivateFieldLooseKey("path");
+
+var _request = _classPrivateFieldLooseKey("request");
+
+var _requestTemplate = _classPrivateFieldLooseKey("requestTemplate");
+
+var _stage = _classPrivateFieldLooseKey("stage");
+
 class LambdaIntegrationEvent {
   constructor(request, stage, requestTemplate, path) {
     Object.defineProperty(this, _path, {
@@ -50,11 +58,3 @@ class LambdaIntegrationEvent {
 }
 
 exports.default = LambdaIntegrationEvent;
-
-var _path = _classPrivateFieldLooseKey("path");
-
-var _request = _classPrivateFieldLooseKey("request");
-
-var _requestTemplate = _classPrivateFieldLooseKey("requestTemplate");
-
-var _stage = _classPrivateFieldLooseKey("stage");

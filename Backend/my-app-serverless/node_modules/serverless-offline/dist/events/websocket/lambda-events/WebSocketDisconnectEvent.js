@@ -17,6 +17,8 @@ var id = 0;
 
 function _classPrivateFieldLooseKey(name) { return "__private_" + id++ + "_" + name; }
 
+var _connectionId = _classPrivateFieldLooseKey("connectionId");
+
 class WebSocketDisconnectEvent {
   constructor(connectionId) {
     Object.defineProperty(this, _connectionId, {
@@ -43,5 +45,3 @@ class WebSocketDisconnectEvent {
 }
 
 exports.default = WebSocketDisconnectEvent;
-
-var _connectionId = _classPrivateFieldLooseKey("connectionId");

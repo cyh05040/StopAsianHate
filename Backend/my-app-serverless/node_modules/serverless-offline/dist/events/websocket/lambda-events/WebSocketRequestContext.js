@@ -18,6 +18,14 @@ const {
 } = Date;
 const connectedAt = new Map();
 
+var _connectionId = _classPrivateFieldLooseKey("connectionId");
+
+var _eventType = _classPrivateFieldLooseKey("eventType");
+
+var _route = _classPrivateFieldLooseKey("route");
+
+var _connectedAt = _classPrivateFieldLooseKey("connectedAt");
+
 class WebSocketRequestContext {
   constructor(eventType, route, connectionId) {
     Object.defineProperty(this, _connectionId, {
@@ -88,11 +96,3 @@ class WebSocketRequestContext {
 }
 
 exports.default = WebSocketRequestContext;
-
-var _connectionId = _classPrivateFieldLooseKey("connectionId");
-
-var _eventType = _classPrivateFieldLooseKey("eventType");
-
-var _route = _classPrivateFieldLooseKey("route");
-
-var _connectedAt = _classPrivateFieldLooseKey("connectedAt");

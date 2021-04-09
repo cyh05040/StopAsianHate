@@ -11,6 +11,8 @@ var id = 0;
 
 function _classPrivateFieldLooseKey(name) { return "__private_" + id++ + "_" + name; }
 
+var _lambda = _classPrivateFieldLooseKey("lambda");
+
 class InvokeAsyncController {
   constructor(lambda) {
     Object.defineProperty(this, _lambda, {
@@ -38,5 +40,3 @@ class InvokeAsyncController {
 }
 
 exports.default = InvokeAsyncController;
-
-var _lambda = _classPrivateFieldLooseKey("lambda");

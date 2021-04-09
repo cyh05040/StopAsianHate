@@ -21,6 +21,12 @@ var id = 0;
 
 function _classPrivateFieldLooseKey(name) { return "__private_" + id++ + "_" + name; }
 
+var _lambda = _classPrivateFieldLooseKey("lambda");
+
+var _options = _classPrivateFieldLooseKey("options");
+
+var _server = _classPrivateFieldLooseKey("server");
+
 class HttpServer {
   constructor(options, lambda) {
     Object.defineProperty(this, _lambda, {
@@ -90,9 +96,3 @@ class HttpServer {
 }
 
 exports.default = HttpServer;
-
-var _lambda = _classPrivateFieldLooseKey("lambda");
-
-var _options = _classPrivateFieldLooseKey("options");
-
-var _server = _classPrivateFieldLooseKey("server");
