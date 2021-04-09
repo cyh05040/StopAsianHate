@@ -38,7 +38,7 @@ class SignInScreen extends React.Component {
       signInSuccessWithAuthResult: () => false
     }
   };
- 
+
   // Listen to the Firebase Auth state and set the local state.
   componentDidMount() {
     this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(
@@ -46,7 +46,7 @@ class SignInScreen extends React.Component {
     );
 
   }
-  
+
   // Make sure we un-register Firebase observers when the component unmounts.
   componentWillUnmount() {
     this.unregisterAuthObserver();
@@ -74,8 +74,51 @@ class SignInScreen extends React.Component {
 }
 
 
+
+
+class Help extends React.Component {
+  state = {
+    help: null
+  }
+
+  async componentDidMount() {
+    const response = await fetch('http://localhost:4000/dev/help')
+    const data = await response.json()
+    // save it to your components state so you can use it during render
+    this.setState({help:data})
+    console.log(this.state.help)
+  }
+
+
+  render() {
+    return (
+      <div>
+        <div className="title">Help Section</div>
+        {/* /* <ul>
+        
+          <li>
+            <div>{this.state.help}</div>
+          </li>
+        </ul> */ }
+        <ul>
+        {
+          this.state.help && this.state.help.map(help => {
+            return (
+              <li>
+                <div>{help.organization}</div>
+                <div>{help.description}</div>
+              </li>
+            )
+          })
+        }
+        </ul>
+      </div>
+    )
+  }
+};
+
+
 function App() {
-  const LogIn = new SignInScreen();
   return ( 
     <div className="App">
       <div class="tabs is-large">
@@ -91,7 +134,7 @@ function App() {
         <div>You are not alone.</div>
         <div>Stop AAPI Hate!</div>
         <SignInScreen />
-
+        <Help />
       
       </div>
       
@@ -100,3 +143,7 @@ function App() {
 }
 
 export default App;
+
+
+
+const data = { username: 'example' };
