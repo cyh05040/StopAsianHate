@@ -23,11 +23,11 @@ module.exports.hello = async (event) => {
   // return { message: 'Go Serverless v1.0! Your function executed successfully!', event };
 };
 
-module.exports.help = async (event) => {
-  // You'll only receive events for GET /help requests
+module.exports.incident = async (event) => {
+  // You'll only receive events for GET /incident requests
   const firebaseTokenVerifier = require('firebase-token-verifier')
   const projectId = 'firebase-project-id'
-  if (event.path === '/help' && event.httpMethod === 'GET') {
+  if (event.path === '/incident' && event.httpMethod === 'GET') {
 
     // check the header named Authorization
     const token = event.headers['Authorization']
@@ -44,11 +44,10 @@ module.exports.help = async (event) => {
       return {
         statusCode: 200,
         body: JSON.stringify([{
-          organization: 'EnoughIsEnough',
-          images: 'enoughIsenough.jpg',
-          type: 'donation',
-          description: '#EnoughIsEnough is a grassroots initiative by Asian American business owners in New York City who came together to take action on the recent surge in nationwide hate crimes against the Asian American community. Frustrated by the lack of media coverage on the recent violence, we are rallying all the industry homies to encourage people both in and out of the Asian community to realize the power of their voice.',			
-          url: 'https://givebutter.com/enoughisenough',
+          description: 'Some one said to me: Mind your business Chinese lady. I don’t care about you people. Go to hell. This is America.',
+          neighborhood: 'Woodside, Queens',
+          type: 'Racial Slurs',
+          img: '/img/incident_1.jpg',
         }])
       } 
     } catch (err) {

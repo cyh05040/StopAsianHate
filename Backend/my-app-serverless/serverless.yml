@@ -73,11 +73,11 @@ functions:
 #           path: /{proxy+}
 #           method: ANY
 
-  help:
-    handler: handler.help
+  incident:
+    handler: handler.incident
     events:
       - http:
-          path: /help
+          path: /incident
           method: GET
           cors: true
 
