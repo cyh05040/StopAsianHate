@@ -79,6 +79,8 @@ functions:
       - http:
           path: /help
           method: GET
+          cors: true
+
 
 
   # - http:
