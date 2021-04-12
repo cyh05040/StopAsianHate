@@ -26,9 +26,9 @@ module.exports.hello = async (event) => {
 module.exports.incident = async (event) => {
   // You'll only receive events for GET /incident requests
   const firebaseTokenVerifier = require('firebase-token-verifier')
-  const projectId = 'firebase-project-id'
+  const projectId = 'stopasianhate-8eeee'
   if (event.path === '/incident' && event.httpMethod === 'GET') {
-
+    console.log(event)
     // check the header named Authorization
     const token = event.headers['Authorization']
     // If no token is provided, or it is "", return a 401
