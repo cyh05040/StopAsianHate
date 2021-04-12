@@ -14,8 +14,8 @@
 }
 
 .App-header {
-  /* background-color: #5a5c5f; */
-  background-image: url("stopasianhate.jpg");
+  background-color: #5a5c5f;
+  /* background-image: url("stopasianhate.jpg");  */
   background-size:cover;
   min-height: 100vh;
   display: flex;
@@ -37,4 +37,18 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.background{
+    background-image: url("stopasianhate.jpg");
+    background-size:cover;
+    min-height: 100vh;
+    display: flex;
+}
+
+.grey{
+  background-color: #5a5c5f;
+  background-size:cover;
+  min-height: 100vh;
+  display: flex;
 }
