@@ -36,7 +36,7 @@ const HomeScreen = () => {
                 <div class="mx-auto text-center">
                     <h1 class="mx-auto my-0 text-uppercase">STOP THE HATE</h1>
                     <h2 class="text-white-50 mx-auto mt-2 mb-5">#I Still Believe in our city</h2>
-                    <a class="btn btn-secondary js-scroll-trigger" href="#story">Encounter an incident?</a>
+                    <a class="btn btn-secondary js-scroll-trigger" href="#story">Story of my life</a>
                 </div>
             </div>
         </header>
@@ -113,7 +113,6 @@ const HomeScreen = () => {
                             <button class="btn btn-primary mx-auto" type="submit">Sign Up</button>
                         </form> */}
                         <SignInScreen />
-                        <Incident />
                     </div>
                 </div>
             </div>
@@ -193,7 +192,8 @@ class Incident extends React.Component {
     }
   
     async componentDidMount() {
-      const idToken = await firebase.auth().currentuser?.getIdToken()
+      const idToken = await firebase.auth().currentUser?.getIdToken()
+      console.log(idToken)
       const response = await fetch('http://localhost:4000/dev/incident', {
         headers: {
           'Authorization': idToken
@@ -217,9 +217,10 @@ class Incident extends React.Component {
             this.state.incident && this.state.incident.map(incident => {
               return (
                 <li>
-                  <div>{incident.neighborhood}</div>
-                  <div>{incident.description}</div>
-                  <div>{incident.type}</div>
+                  <br/>
+                  <div class="text-white-50">Location: {incident.neighborhood}</div>
+                  <div class="text-white-50">Description: {incident.description}</div>
+                  <div class="text-white-50">Type: {incident.type}</div>
                   <img class="img-fluid" src={incident.img} alt="..." />
                 </li>
               )
@@ -275,10 +276,13 @@ class SignInScreen extends React.Component {
       }
       return (
         <div>
-          <p>Welcome {firebase.auth().currentUser.displayName}! You are now signed-in!</p>
-          <p>Your email is {firebase.auth().currentUser.email}</p>
-          <p>Your token is {this.state.data}</p>
-          <a onClick={() => firebase.auth().signOut()}>Sign-out</a>
+          <p class="text-white-50">Welcome {firebase.auth().currentUser.displayName}! You are now signed-in!</p>
+          <p class="text-white-50">Your email is {firebase.auth().currentUser.email}</p>
+          <p class="text-white-50">Your token is {this.state.data}</p>
+          <button onClick={() => firebase.auth().signOut()} class="btn btn-secondary mx-auto" type="submit">
+            <a>Sign-out</a>
+          </button>
+          <Incident />
         </div>
       );
     }
