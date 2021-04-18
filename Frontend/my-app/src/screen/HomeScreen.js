@@ -20,12 +20,16 @@ const HomeScreen = () => {
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#story">Story</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#news">News</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#signup">Report</a></li>
                         <li class="nav-item">
                             <Link to={'/map'}><a class="nav-link" >Map</a></Link>
                         </li>
+                        <li class="nav-item">
+                            <Link to={'/story'}><a class="nav-link" >Story</a></Link>
+                        </li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#photo">Photo</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#news">News</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#signup">Report</a></li>
+                    
                     </ul>
                 </div>
             </div>
@@ -40,12 +44,12 @@ const HomeScreen = () => {
                 </div>
             </div>
         </header>
-        {/* <!-- Story--> */}
-        <section class="about-section text-center" id="story">
+        {/* <!-- Photo--> */}
+        <section class="about-section text-center" id="photo">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 mx-auto">
-                        <h2 class="text-white mb-4">Story</h2>
+                        <h2 class="text-white mb-4">Photo</h2>
                         <p class="text-white-50">
                             nani nani nani nani nani naani nania nania nani 
                             <a href="https://nani.today/">the preview page</a>

@@ -3,7 +3,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 import React from 'react';
 
-
 import {
   BrowserRouter as Router,
   Route,
@@ -12,7 +11,9 @@ import {
 import HomeScreen from './screen/HomeScreen';
 import MapScreen from './screen/MapScreen';
 import SigninScreen from './screen/SigninScreen';
-import HelpScreen from './screen/HelpScreen';
+import StoryScreen from './screen/StoryScreen';
+
+
 
 function App() {
   return ( 
@@ -20,8 +21,8 @@ function App() {
       <Router>
           <Route path='/' component={HomeScreen} exact></Route>
           <Route path='/map' component={MapScreen} exact></Route>
-          <Route path='/story' component={SigninScreen} exact></Route>
-          <Route path='/help' component={HelpScreen} exact></Route>
+          <Route path='/signin' component={SigninScreen} exact></Route>
+          <Route path='/story' component={StoryScreen} exact></Route>
       </Router>
     </div>
   );
