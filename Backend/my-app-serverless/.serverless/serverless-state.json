@@ -85,10 +85,10 @@
               }
             }
           },
-          "HelloLogGroup": {
+          "IncidentLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-              "LogGroupName": "/aws/lambda/my-app-serverless-dev-hello"
+              "LogGroupName": "/aws/lambda/my-app-serverless-dev-incident"
             }
           },
           "IamRoleLambdaExecution": {
@@ -202,7 +202,7 @@
                         "Resource": [
                           {
                             "Fn::GetAtt": [
-                              "HelloLogGroup",
+                              "IncidentLogGroup",
                               "Arn"
                             ]
                           }
@@ -214,18 +214,18 @@
               ]
             }
           },
-          "HelloLambdaFunction": {
+          "IncidentLambdaFunction": {
             "Type": "AWS::Lambda::Function",
             "Properties": {
               "Code": {
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/my-app-serverless/dev/1616634752010-2021-03-25T01:12:32.010Z/my-app-serverless.zip"
+                "S3Key": "serverless/my-app-serverless/dev/1618871548546-2021-04-19T22:32:28.546Z/my-app-serverless.zip"
               },
-              "Handler": "s_hello.handler",
+              "Handler": "s_incident.handler",
               "Runtime": "nodejs12.x",
-              "FunctionName": "my-app-serverless-dev-hello",
+              "FunctionName": "my-app-serverless-dev-incident",
               "MemorySize": 1024,
               "Timeout": 6,
               "Role": {
@@ -236,17 +236,17 @@
               }
             },
             "DependsOn": [
-              "HelloLogGroup"
+              "IncidentLogGroup"
             ]
           },
-          "HelloLambdaVersionMS73FV9Ch87fPG2ILiVFSTQF2ZsNXwCeAvldKSYDWc": {
+          "IncidentLambdaVersion414aNeT7WMLndo77R0GObGkBOnVwhcVhKuIzNHAWFE": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
-                "Ref": "HelloLambdaFunction"
+                "Ref": "IncidentLambdaFunction"
               },
-              "CodeSha256": "KDzR2p5UIq/Qt0Pg5UepiRVN0cdkevLTSWSmpeWCWVw="
+              "CodeSha256": "78xhsoX3rLs8DvR1gZYkd2jhIyA2rAl8BU+IgQ/Qhic="
             }
           },
           "ApiGatewayRestApi": {
@@ -261,7 +261,7 @@
               "Policy": ""
             }
           },
-          "ApiGatewayResourceProxyVar": {
+          "ApiGatewayResourceIncident": {
             "Type": "AWS::ApiGateway::Resource",
             "Properties": {
               "ParentId": {
@@ -270,65 +270,64 @@
                   "RootResourceId"
                 ]
               },
-              "PathPart": "{proxy+}",
+              "PathPart": "incident",
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
             }
           },
-          "ApiGatewayMethodAny": {
+          "ApiGatewayMethodIncidentOptions": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
-              "HttpMethod": "ANY",
+              "AuthorizationType": "NONE",
+              "HttpMethod": "OPTIONS",
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseParameters": {
+                    "method.response.header.Access-Control-Allow-Origin": true,
+                    "method.response.header.Access-Control-Allow-Headers": true,
+                    "method.response.header.Access-Control-Allow-Methods": true
+                  },
+                  "ResponseModels": {}
+                }
+              ],
               "RequestParameters": {},
-              "ResourceId": {
-                "Fn::GetAtt": [
-                  "ApiGatewayRestApi",
-                  "RootResourceId"
+              "Integration": {
+                "Type": "MOCK",
+                "RequestTemplates": {
+                  "application/json": "{statusCode:200}"
+                },
+                "ContentHandling": "CONVERT_TO_TEXT",
+                "IntegrationResponses": [
+                  {
+                    "StatusCode": "200",
+                    "ResponseParameters": {
+                      "method.response.header.Access-Control-Allow-Origin": "'*'",
+                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
+                    },
+                    "ResponseTemplates": {
+                      "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".+\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+                    }
+                  }
                 ]
               },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceIncident"
+              },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
-              },
-              "ApiKeyRequired": false,
-              "AuthorizationType": "NONE",
-              "Integration": {
-                "IntegrationHttpMethod": "POST",
-                "Type": "AWS_PROXY",
-                "Uri": {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:",
-                      {
-                        "Ref": "AWS::Partition"
-                      },
-                      ":apigateway:",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      ":lambda:path/2015-03-31/functions/",
-                      {
-                        "Fn::GetAtt": [
-                          "HelloLambdaFunction",
-                          "Arn"
-                        ]
-                      },
-                      "/invocations"
-                    ]
-                  ]
-                }
-              },
-              "MethodResponses": []
+              }
             }
           },
-          "ApiGatewayMethodProxyVarAny": {
+          "ApiGatewayMethodIncidentGet": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
-              "HttpMethod": "ANY",
+              "HttpMethod": "GET",
               "RequestParameters": {},
               "ResourceId": {
-                "Ref": "ApiGatewayResourceProxyVar"
+                "Ref": "ApiGatewayResourceIncident"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
@@ -353,7 +352,7 @@
                       ":lambda:path/2015-03-31/functions/",
                       {
                         "Fn::GetAtt": [
-                          "HelloLambdaFunction",
+                          "IncidentLambdaFunction",
                           "Arn"
                         ]
                       },
@@ -365,7 +364,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1616634736376": {
+          "ApiGatewayDeployment1618871536318": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -374,16 +373,16 @@
               "StageName": "dev"
             },
             "DependsOn": [
-              "ApiGatewayMethodAny",
-              "ApiGatewayMethodProxyVarAny"
+              "ApiGatewayMethodIncidentOptions",
+              "ApiGatewayMethodIncidentGet"
             ]
           },
-          "HelloLambdaPermissionApiGateway": {
+          "IncidentLambdaPermissionApiGateway": {
             "Type": "AWS::Lambda::Permission",
             "Properties": {
               "FunctionName": {
                 "Fn::GetAtt": [
-                  "HelloLambdaFunction",
+                  "IncidentLambdaFunction",
                   "Arn"
                 ]
               },
@@ -524,9 +523,9 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/my-app-serverless/dev/1616634752010-2021-03-25T01:12:32.010Z/custom-resources.zip"
+                "S3Key": "serverless/my-app-serverless/dev/1618871548546-2021-04-19T22:32:28.546Z/custom-resources.zip"
               },
-              "FunctionName": "my-app-serverless-dev-custom-resource-apigw-cw-role",
+              "FunctionName": "my-app-serverless-undefined-custom-resource-apigw-cw-role",
               "Handler": "apiGatewayCloudWatchRole/handler.handler",
               "MemorySize": 1024,
               "Runtime": "nodejs12.x",
@@ -542,13 +541,13 @@
               "IamRoleCustomResourcesLambdaExecution"
             ]
           },
-          "CloudWatchLogsSubscriptionFilterHelloLogGroup": {
+          "CloudWatchLogsSubscriptionFilterIncidentLogGroup": {
             "Type": "AWS::Logs::SubscriptionFilter",
             "Properties": {
               "DestinationArn": "arn:aws:logs:us-east-1:802587217904:destination:e84800a2-7949-4ca9-9896-2b55b4a7f20b#FsrJCzvHW0MdwT7pxK#my-app-serverless#dev",
               "FilterPattern": "?\"REPORT RequestId: \" ?\"SERVERLESS_ENTERPRISE\"",
               "LogGroupName": {
-                "Ref": "HelloLogGroup"
+                "Ref": "IncidentLogGroup"
               }
             }
           },
@@ -577,10 +576,10 @@
               ]
             }
           },
-          "HelloLambdaFunctionQualifiedArn": {
+          "IncidentLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "HelloLambdaVersionMS73FV9Ch87fPG2ILiVFSTQF2ZsNXwCeAvldKSYDWc"
+              "Ref": "IncidentLambdaVersion414aNeT7WMLndo77R0GObGkBOnVwhcVhKuIzNHAWFE"
             }
           },
           "ServiceEndpoint": {
@@ -703,31 +702,43 @@
     ],
     "pluginsData": {},
     "functions": {
-      "hello": {
-        "handler": "s_hello.handler",
+      "incident": {
+        "handler": "s_incident.handler",
         "events": [
           {
             "http": {
-              "path": "",
-              "method": "any",
-              "integration": "AWS_PROXY"
-            }
-          },
-          {
-            "http": {
-              "path": "{proxy+}",
-              "method": "any",
+              "path": "incident",
+              "method": "get",
+              "cors": {
+                "origins": [
+                  "*"
+                ],
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "GET"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Amz-Date",
+                  "Authorization",
+                  "X-Api-Key",
+                  "X-Amz-Security-Token",
+                  "X-Amz-User-Agent"
+                ],
+                "allowCredentials": false
+              },
               "integration": "AWS_PROXY"
             }
           }
         ],
-        "name": "my-app-serverless-dev-hello",
+        "name": "my-app-serverless-dev-incident",
         "package": {},
         "memory": 1024,
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "HelloLambdaVersionMS73FV9Ch87fPG2ILiVFSTQF2ZsNXwCeAvldKSYDWc"
+        "versionLogicalId": "IncidentLambdaVersion414aNeT7WMLndo77R0GObGkBOnVwhcVhKuIzNHAWFE"
       }
     },
     "configValidationMode": "warn",
@@ -756,10 +767,10 @@
     "isDashboardAppPreconfigured": true,
     "orgUid": "e84800a2-7949-4ca9-9896-2b55b4a7f20b",
     "appUid": "FsrJCzvHW0MdwT7pxK",
-    "artifact": "C:\\Users\\Eric\\GitHub\\StopAsianHate\\Backend\\my-app-serverless\\.serverless\\my-app-serverless.zip"
+    "artifact": "C:\\Users\\cyh05\\Desktop\\StopAsianHate\\Backend\\my-app-serverless\\.serverless\\my-app-serverless.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/my-app-serverless/dev/1616634752010-2021-03-25T01:12:32.010Z",
+    "artifactDirectoryName": "serverless/my-app-serverless/dev/1618871548546-2021-04-19T22:32:28.546Z",
     "artifact": "my-app-serverless.zip"
   }
 }

@@ -1,1 +1,1 @@
-{"name":"my-app-serverless","description":"","version":"0.1.0","devDependencies":{"serverless":"^2.30.3","serverless-dynamodb-local":"^0.2.39","serverless-offline":"^6.9.0"},"dependencies":{"firebase-token-verifier":"^0.1.0"}}
+{"name":"my-app-serverless","description":"","version":"0.1.0","devDependencies":{"serverless":"^2.30.3","serverless-dynamodb-local":"^0.2.39","serverless-offline":"^6.9.0"},"dependencies":{"cors":"^2.8.5","firebase-token-verifier":"^0.1.0"}}
