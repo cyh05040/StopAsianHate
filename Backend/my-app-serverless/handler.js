@@ -42,7 +42,8 @@ module.exports.incident = async (event) => {
     // If no token is provided, or it is "", return a 401
     if (!token) {
       return {
-        statusCode: 401
+        statusCode: 401,
+        headers
       }
     }
     try {
@@ -51,6 +52,7 @@ module.exports.incident = async (event) => {
        // user is now confirmed to be authorized, return the data
       return {
         statusCode: 200,
+        headers,
         body: JSON.stringify([{
           description: 'Some one said to me: Mind your business Chinese lady. I don’t care about you people. Go to hell. This is America.',
           neighborhood: 'Woodside, Queens',
@@ -62,7 +64,8 @@ module.exports.incident = async (event) => {
       // the token was invalid,
       console.error(err)
       return {
-        statusCode: 401
+        statusCode: 401,
+        headers
       }
     }
   }
