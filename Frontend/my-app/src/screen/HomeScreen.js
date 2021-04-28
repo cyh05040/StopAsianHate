@@ -4,7 +4,7 @@ import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import firebase from 'firebase';
-import { incident } from '../../../../Backend/my-app-serverless/handler';
+// import { incident } from '../../../../Backend/my-app-serverless/handler';
 
 
 
@@ -232,8 +232,9 @@ class Incident extends React.Component {
     render() {
       return (
         <div>
-            <div class="title">All Incidents</div>
-            <ul>
+            <br></br>
+            <h2 class="text-white mb-5">All Incidents</h2>
+            {/* <ul>
                 {
                     this.state.incidents.map(incident => {
                         return(
@@ -244,7 +245,20 @@ class Incident extends React.Component {
                         );
                     })
                 }
+            </ul> */}
+            <ul>
+            {
+                this.state.incidents && this.state.incidents.Items.map((item, index) => {
+                return (
+                        <li class="text-white-50" key={index}>
+                            {item.description} 
+                            {item.zipcode}
+                        </li>
+                );
+                })
+            }
             </ul>
+            
             <div></div>
         </div>
 
