@@ -4,6 +4,7 @@ import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import firebase from 'firebase';
+import { incident } from '../../../../Backend/my-app-serverless/handler';
 
 
 
@@ -40,7 +41,7 @@ const HomeScreen = () => {
                 <div class="mx-auto text-center">
                     <h1 class="mx-auto my-0 text-uppercase">STOP THE HATE</h1>
                     <h2 class="text-white-50 mx-auto mt-2 mb-5">#I Still Believe in our city</h2>
-                    <a class="btn btn-secondary js-scroll-trigger" href="#story">Story of my life</a>
+                    <Link to={'/story'}><a class="btn btn-secondary js-scroll-trigger">Story of my life</a></Link>
                 </div>
             </div>
         </header>
@@ -68,8 +69,9 @@ const HomeScreen = () => {
                     <div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0" src="/img/background.png" alt="..." /></div>
                     <div class="col-xl-4 col-lg-5">
                         <div class="featured-text text-center text-lg-left">
-                            <h4>NextShark</h4>
+                            <h4>NBC</h4>
                             <p class="text-black-50 mb-0">Police Data Shows 150% Increase in Hate Attacks on Asians Across Major Cities</p>
+                            <div class="text-white"><a href="https://www.nbcnews.com/news/asian-america/anti-asian-hate-crimes-increased-nearly-150-2020-mostly-n-n1260264">Read more...</a></div>
                         </div>
                     </div>
                 </div>
@@ -80,8 +82,9 @@ const HomeScreen = () => {
                         <div class="bg-black text-center h-100 project">
                             <div class="d-flex h-100">
                                 <div class="project-text w-100 my-auto text-center text-lg-left">
-                                    <h4 class="text-white">NBC</h4>
+                                    <h4 class="text-white">Washington Post</h4>
                                     <p class="mb-0 text-white-50">Woman Charged With Hate Crime and Battery For Using Racial Slurs, Spitting on Asian</p>
+                                    <div class="text-white"><a href="https://www.washingtonpost.com/nation/2021/03/09/california-woman-charged-hatecrime-asianamerican/">Read more...</a></div>
                                     <hr class="d-none d-lg-block mb-0 ml-0" />
                                 </div>
                             </div>
@@ -95,8 +98,9 @@ const HomeScreen = () => {
                         <div class="bg-black text-center h-100 project">
                             <div class="d-flex h-100">
                                 <div class="project-text w-100 my-auto text-center text-lg-right">
-                                    <h4 class="text-white">NEW YORK TIMES</h4>
+                                    <h4 class="text-white">New York Times</h4>
                                     <p class="mb-0 text-white-50">Elderly Asian Man Left Brain Dead After Violent Robbery in Oakland</p>
+                                    <div class="text-white"><a href="nytimes.com/2021/02/27/us/asian-american-hate-crimes.html">Read more...</a></div>
                                     <hr class="d-none d-lg-block mb-0 mr-0" />
                                 </div>
                             </div>
@@ -192,46 +196,71 @@ firebase.initializeApp(config);
 
 class Incident extends React.Component {
     state = {
-      incident: null
+        incidents: null,
     }
-  
+
     async componentDidMount() {
-      const idToken = await firebase.auth().currentUser?.getIdToken()
-      console.log(idToken)
-      const response = await fetch('http://localhost:4000/dev/incident', {
-        headers: {
-          'Authorization': idToken
+        this.getIncidentList();
+    }
+    
+
+    async getIncidentList(){
+        const idToken = await firebase.auth().currentUser?.getIdToken()
+        // console.log(idToken)
+        try
+        {
+            const response = await fetch('http://localhost:4000/dev/incident', {
+                // method: "GET",
+                headers: {
+                    'Authorization': idToken
+                }
+            });
+            if (response.status === 401){
+            return console.log('unauthorized')
+            } else {
+                const data = await response.json()
+                // save it to your components state so you can use it during render
+                this.setState({
+                    incidents:data
+                });
+            }
+        } catch (err) {
+            console.error(err)
         }
-      })
-      if (response.status === 401){
-        return console.log('unauthorized')
-      }
-  
-      const data = await response.json()
-      // save it to your components state so you can use it during render
-      this.setState({incident:data})
-      console.log(this.state.incident)
     }
   
     render() {
       return (
         <div>
-          <ul>
-          {
-            this.state.incident && this.state.incident.map(incident => {
-              return (
-                <li>
-                  <br/>
-                  <div class="text-white-50">Location: {incident.neighborhood}</div>
-                  <div class="text-white-50">Description: {incident.description}</div>
-                  <div class="text-white-50">Type: {incident.type}</div>
-                  <img class="img-fluid" src={incident.img} alt="..." />
-                </li>
-              )
-            })
-          }
-          </ul>
+            <div class="title">All Incidents</div>
+            <ul>
+                {
+                    this.state.incidents.map(incident => {
+                        return(
+                        <li>
+                            Incident Description: {incident.description}
+                            Zip Code: {incident.zipcode}
+                        </li>
+                        );
+                    })
+                }
+            </ul>
+            <div></div>
         </div>
+
+            // <div>
+        //   <ul>
+        //   {
+        //     this.state.incidents && this.state.incidents.Items.map((item, index) => {
+        //       return (
+        //             <li class="text-white-50" key={index}>
+        //                 {item.description} from {item.userKey} on {item.index}
+        //             </li>
+        //       );
+        //     })
+        //   }
+        //   </ul>
+        // </div>
       )
     }
   };
@@ -240,7 +269,9 @@ class Incident extends React.Component {
 class SignInScreen extends React.Component {
     // The component's Local state.
     state = {
-      isSignedIn: false // Local signed-in state.
+      isSignedIn: false, // Local signed-in state.
+      zipcode: null,
+      description: null,
     };
    
     // Configure FirebaseUI.
@@ -262,12 +293,64 @@ class SignInScreen extends React.Component {
       this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(
           (user) => this.setState({isSignedIn: !!user})
       );
-  
+
+      this.refreshIncidentList();
     }
   
     // Make sure we un-register Firebase observers when the component unmounts.
     componentWillUnmount() {
       this.unregisterAuthObserver();
+    }
+
+    
+    async postIncident(event) {
+        const idToken = await firebase.auth().currentUser?.getIdToken()
+        console.log(idToken)
+        try
+        {
+            const response = await fetch('http://localhost:4000/dev/incident', {
+                method: "POST",
+                headers: {
+                    'Authorization': idToken
+                },
+                body: JSON.stringify({
+                    zipcode: this.state.zipcode,
+                    description: this.state.description,
+                })
+            });
+            if (response.status === 401){
+            return console.log('unauthorized')
+            } else {
+                this.refreshIncidentList();
+            }
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
+    async refreshIncidentList(){
+        const idToken = await firebase.auth().currentUser?.getIdToken()
+        console.log(idToken)
+        try
+        {
+            const response = await fetch('http://localhost:4000/dev/incident', {
+                headers: {
+                    'Authorization': idToken
+                }
+            });
+            if (response.status === 401){
+            return console.log('unauthorized')
+            } else {
+                const data = await response.json()
+                // save it to your components state so you can use it during render
+                this.setState({
+                    zipcode:data.zipcode,
+                    description:data.description,
+                });
+            }
+        } catch (err) {
+            console.error(err)
+        }
     }
    
     render() {
@@ -280,13 +363,33 @@ class SignInScreen extends React.Component {
       }
       return (
         <div>
-          <p class="text-white-50">Welcome {firebase.auth().currentUser.displayName}! You are now signed-in!</p>
-          <p class="text-white-50">Your email is {firebase.auth().currentUser.email}</p>
-          <p class="text-white-50">Your token is {this.state.data}</p>
-          <button onClick={() => firebase.auth().signOut()} class="btn btn-secondary mx-auto" type="submit">
-            <a>Sign-out</a>
-          </button>
-          <Incident />
+            <p class="text-white-50">Welcome {firebase.auth().currentUser.displayName}! You are now signed-in!</p>
+            <p class="text-white-50">Your email is {firebase.auth().currentUser.email}</p>
+            <p class="text-white-50">Your token is {this.state.data}</p>
+            <button onClick={() => firebase.auth().signOut()} class="btn btn-secondary mx-auto" type="submit">
+                <a>Sign-out</a>
+            </button>
+            <div>
+                <br></br>
+                <form onSubmit={this.handleSubmit}>
+                    <label  class="text-white-50">
+                        Zip Code:
+                        <input type="text" value={this.state.value} onChange={
+                            (event) => this.setState({ zipcode: event.target.value })
+                        } />
+                    </label >
+                    <label  class="text-white-50">
+                        Description:
+                        <input type="text" value={this.state.value} onChange={
+                            (event) => this.setState({ description: event.target.value })
+                        } />
+                    </label>
+                    <div>
+                    <button onClick={ () => this.postIncident()}>Submit</button>
+                    </div>
+                </form>
+            </div>
+            <Incident />
         </div>
       );
     }
