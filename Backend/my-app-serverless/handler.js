@@ -1,27 +1,19 @@
+const AWS = require("aws-sdk");
+const { v4: uuidv4 } = require("uuid");
+const docClient = new AWS.DynamoDB.DocumentClient();
 const headers = {
   'Access-Control-Allow-Origin': '*'
   }
 
 
-module.exports.hello = async (event) => {
-  if (event.path == '/whoami' && event.httpMethod === 'GET'){
-    return {
-      statusCode: 200,
-      body: JSON.stringify({username: 'yc2645 Eric Chen is the best'})
+const checkUser = async (event) => {
+  const token = event.headers['Authorization']
+    if (!token) {
+      throw new Error('Missing token')
     }
-  }
-  return {
-    statusCode: 200,
-    body: JSON.stringify(
-      {
-        input: event,
-      },
-    ),
-  };
-
-  // Use this code if you don't use the http event with the LAMBDA-PROXY integration
-  // return { message: 'Go Serverless v1.0! Your function executed successfully!', event };
-};
+    const decodedUser = await firebaseTokenVerifier.validate(token, projectId)
+    return decodedUser
+}
 
 module.exports.incident = async (event) => {
   // You'll only receive events for GET /incident requests
@@ -48,25 +40,81 @@ module.exports.incident = async (event) => {
     }
     try {
       // validate the token from the request
-      const decoded = await firebaseTokenVerifier.validate(token, projectId)
+      // const decoded = await firebaseTokenVerifier.validate(token, projectId)
        // user is now confirmed to be authorized, return the data
+      const results = await docClient.scan({
+        TableName: "incident-list",
+        Limit:10,
+      }).promise()
       return {
         statusCode: 200,
         headers,
-        body: JSON.stringify([{
-          description: 'Some one said to me: Mind your business Chinese lady. I don’t care about you people. Go to hell. This is America.',
-          neighborhood: 'Woodside, Queens',
-          type: 'Racial Slurs',
-          img: '/img/incident_1.jpg',
-        }])
+        body: JSON.stringify(results)
+        // body: JSON.stringify([{
+        //   description: 'Some one said to me: Mind your business Chinese lady. I don’t care about you people. Go to hell. This is America.',
+        //   zipcode: '10044',
+        //   type: 'Racial Slurs',
+        //   img: '/img/incident_1.jpg',
+        // }])
       } 
     } catch (err) {
       // the token was invalid,
       console.error(err)
       return {
         statusCode: 401,
-        headers
+        headers,
       }
     }
   }
+
+  if (event.path === '/incident' && event.httpMethod === 'POST') {
+    // check if the user is authenticated
+        let user;
+    try {
+      user = await checkUser(event)
+    } catch (err) {
+      return {
+        statusCode: 401,
+        headers,
+        body: JSON.stringify({message: err.message})
+      }
+    }
+  
+    // check that the request contains a body
+    if (!event.body) {
+      return {
+        statusCode: 400,
+        headers,
+        body: JSON.stringify({message: 'Missing body'})
+      }
+    }
+  
+    // parse the request body as JSON
+    const requestBody = JSON.parse(event.body);
+
+    // const reportIncident = (userKey, requestBody) => {
+        // return 
+    await docClient
+          .put({
+            TableName: "incident-list",
+            Item: {
+              userKey: user.sub,
+              incidentId: uuidv4(),
+              timestamp: Date.now(),
+              description: requestBody.description,
+              zipcode: requestBody.zipcode,
+            },
+          })
+        .promise()
+      // send back a successful response
+        return {
+            statusCode: 201,
+            headers
+        }
+    }
+
+
 };
+
+
+

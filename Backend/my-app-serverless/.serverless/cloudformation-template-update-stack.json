@@ -133,6 +133,19 @@
                       "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/my-app-serverless-dev*:*:*"
                     }
                   ]
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "dynamodb:DescribeTable",
+                    "dynamodb:Query",
+                    "dynamodb:Scan",
+                    "dynamodb:GetItem",
+                    "dynamodb:PutItem",
+                    "dynamodb:UpdateItem",
+                    "dynamodb:DeleteItem"
+                  ],
+                  "Resource": "arn:aws:dynamodb:us-east-1:836374152057:table/incident-list"
                 }
               ]
             }
@@ -207,7 +220,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/my-app-serverless/dev/1618872059482-2021-04-19T22:40:59.482Z/my-app-serverless.zip"
+          "S3Key": "serverless/my-app-serverless/dev/1619650152773-2021-04-28T22:49:12.773Z/my-app-serverless.zip"
         },
         "Handler": "s_incident.handler",
         "Runtime": "nodejs12.x",
@@ -225,14 +238,14 @@
         "IncidentLogGroup"
       ]
     },
-    "IncidentLambdaVersiongBA0RxUTJBwkIF6j4syuTkmPRgP7QX41ujPqx4": {
+    "IncidentLambdaVersionh768Q85qOMzAk25WXXE0iaUeFsbElFE8Z0t9RKYJU": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "IncidentLambdaFunction"
         },
-        "CodeSha256": "Pq/Oew7eltN79cMoL3kP+hOU1icCmlXavBQ+LXaePnw="
+        "CodeSha256": "OGhJ4GfmoIGWHxLcG1ouaH2N3fyG7iQ/Ko2io/24pxA="
       }
     },
     "ApiGatewayRestApi": {
@@ -291,7 +304,7 @@
               "ResponseParameters": {
                 "method.response.header.Access-Control-Allow-Origin": "'*'",
                 "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
-                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST,GET'"
               },
               "ResponseTemplates": {
                 "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".+\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
@@ -350,7 +363,50 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1618872046264": {
+    "ApiGatewayMethodIncidentPost": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "POST",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceIncident"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "IncidentLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": []
+      }
+    },
+    "ApiGatewayDeployment1619650140914": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -360,7 +416,8 @@
       },
       "DependsOn": [
         "ApiGatewayMethodIncidentOptions",
-        "ApiGatewayMethodIncidentGet"
+        "ApiGatewayMethodIncidentGet",
+        "ApiGatewayMethodIncidentPost"
       ]
     },
     "IncidentLambdaPermissionApiGateway": {
@@ -509,7 +566,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/my-app-serverless/dev/1618872059482-2021-04-19T22:40:59.482Z/custom-resources.zip"
+          "S3Key": "serverless/my-app-serverless/dev/1619650152773-2021-04-28T22:49:12.773Z/custom-resources.zip"
         },
         "FunctionName": "my-app-serverless-undefined-custom-resource-apigw-cw-role",
         "Handler": "apiGatewayCloudWatchRole/handler.handler",
@@ -565,7 +622,7 @@
     "IncidentLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "IncidentLambdaVersiongBA0RxUTJBwkIF6j4syuTkmPRgP7QX41ujPqx4"
+        "Ref": "IncidentLambdaVersionh768Q85qOMzAk25WXXE0iaUeFsbElFE8Z0t9RKYJU"
       }
     },
     "ServiceEndpoint": {
