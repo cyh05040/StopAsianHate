@@ -107,7 +107,7 @@ const HomeScreen = () => {
                 </div>
                 {/* <!-- News One Row--> */}
                 <div class="row justify-content-center no-gutters mb-5 mb-lg-0">
-                    <div class="col-lg-6"><img class="img-fluid" src="/img/background.png" alt="..." /></div>
+                    <div class="col-lg-6"><img class="img-fluid" src="/img/wsp.png" alt="..." /></div>
                     <div class="col-lg-6">
                         <div class="bg-black text-center h-100 project">
                             <div class="d-flex h-100">
@@ -123,7 +123,7 @@ const HomeScreen = () => {
                 </div>
                 {/* <!-- Project Two Row--> */}
                 <div class="row justify-content-center no-gutters">
-                    <div class="col-lg-6"><img class="img-fluid" src="/img/background.png" alt="..." /></div>
+                    <div class="col-lg-6"><img class="img-fluid" src="/img/elderly.png" alt="..." /></div>
                     <div class="col-lg-6 order-lg-first">
                         <div class="bg-black text-center h-100 project">
                             <div class="d-flex h-100">
@@ -145,7 +145,7 @@ const HomeScreen = () => {
                 <div class="row">
                     <div class="col-md-10 col-lg-8 mx-auto text-center">
                         <i class="far fa-paper-plane fa-2x mb-2 text-white"></i>
-                        <h2 class="text-white mb-5">Recieve alerts around you</h2>
+                        <h2 class="text-white mb-5">Report</h2>
                         {/* <form class="form-inline d-flex">
                             <input class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="inputEmail" type="email" placeholder="Enter email address..." />
                             <button class="btn btn-primary mx-auto" type="submit">Sign Up</button>
@@ -221,8 +221,10 @@ const config = {
     appId: "1:131938165564:web:7e8b3d00d87cd85820b439",
     measurementId: "G-PTZSVBQ7CB"
   };
-firebase.initializeApp(config);
-   
+// Initialize Firebase
+if (firebase.apps.length === 0) {
+    firebase.initializeApp(config);
+  }   
 
 class Incident extends React.Component {
     state = {
@@ -281,8 +283,8 @@ class Incident extends React.Component {
                 this.state.incidents && this.state.incidents.Items.map((item, index) => {
                 return (
                         <li class="text-white-50" key={index}>
-                            {item.description} 
-                            {item.zipcode}
+                            <div>What happened: {item.description}</div>
+                            <div> Zipcode: {item.zipcode}</div>
                         </li>
                 );
                 })
@@ -362,6 +364,7 @@ class SignInScreen extends React.Component {
                     description: this.state.description,
                 })
             });
+            debugger
             if (response.status === 401){
             return console.log('unauthorized')
             } else {
@@ -415,7 +418,7 @@ class SignInScreen extends React.Component {
             </button>
             <div>
                 <br></br>
-                <form onSubmit={this.handleSubmit}>
+                <form>
                     <label  class="text-white-50">
                         Zip Code:
                         <input type="text" value={this.state.value} onChange={
@@ -428,9 +431,7 @@ class SignInScreen extends React.Component {
                             (event) => this.setState({ description: event.target.value })
                         } />
                     </label>
-                    <div>
                     <button onClick={ () => this.postIncident()}>Submit</button>
-                    </div>
                 </form>
             </div>
             <Incident />
