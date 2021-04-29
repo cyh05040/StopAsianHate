@@ -241,7 +241,7 @@ class Incident extends React.Component {
         // console.log(idToken)
         try
         {
-            const response = await fetch('http://localhost:4000/dev/incident', {
+            const response = await fetch('https://e5ieav3xua.execute-api.us-east-1.amazonaws.com/dev/incident', {
                 // method: "GET",
                 headers: {
                     'Authorization': idToken
@@ -354,7 +354,7 @@ class SignInScreen extends React.Component {
         console.log(idToken)
         try
         {
-            const response = await fetch('http://localhost:4000/dev/incident', {
+            const response = await fetch('https://e5ieav3xua.execute-api.us-east-1.amazonaws.com/dev/incident', {
                 method: "POST",
                 headers: {
                     'Authorization': idToken
@@ -380,7 +380,7 @@ class SignInScreen extends React.Component {
         console.log(idToken)
         try
         {
-            const response = await fetch('http://localhost:4000/dev/incident', {
+            const response = await fetch('https://e5ieav3xua.execute-api.us-east-1.amazonaws.com/dev/incident', {
                 headers: {
                     'Authorization': idToken
                 }
