@@ -50,15 +50,45 @@ const HomeScreen = () => {
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 mx-auto">
-                        <h2 class="text-white mb-4">Photo</h2>
-                        <p class="text-white-50">
-                            nani nani nani nani nani naani nania nania nani 
-                            <a href="https://nani.today/">the preview page</a>
-                            .nani nani anani anani nanai nanaiananiananainaianianiana
-                        </p>
+                        <h2 class="text-white mb-4">Stop AAPI Hate New York City Rally</h2>
+                        <div class="text-white-50">
+                            April 1, 2021
+                        </div>
+                        <div class="text-white-50">
+                            <a href="https://nani.today/">Nani.Today</a>
+                        </div>
+                        <div class="text-white-50">
+                            New York politicians and residents gather in a rally to stop anti-Asian violence in Midtown Manhattan and Chinatown
+                        </div>
                     </div>
                 </div>
-                <img class="img-fluid" src="/img/background.png" alt="..." />
+                {/* <img class="img-fluid" src="/img/background.png" alt="..." /> */}
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img class="d-block w-100" src="/img/stopaapirallynyc.jpeg" alt="First slide"/>
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block w-100" src="/img/background.jpeg" alt="Second slide"/>
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block w-100" src="/img/background.jpeg" alt="Third slide"/>
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
             </div>
         </section>
         {/* <!-- News--> */}
@@ -66,7 +96,7 @@ const HomeScreen = () => {
             <div class="container">
                 {/* <!-- Featured News Row--> */}
                 <div class="row align-items-center no-gutters mb-4 mb-lg-5">
-                    <div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0" src="/img/background.png" alt="..." /></div>
+                    <div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0" src="/img/nbc.jpg" alt="..." /></div>
                     <div class="col-xl-4 col-lg-5">
                         <div class="featured-text text-center text-lg-left">
                             <h4>NBC</h4>
