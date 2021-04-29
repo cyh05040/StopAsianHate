@@ -7,6 +7,10 @@ const headers = {
 
 
 const checkUser = async (event) => {
+  //// Should I add this?
+  const firebaseTokenVerifier = require('firebase-token-verifier')
+  const projectId = 'stopasianhate-8eeee'
+  ////
   const token = event.headers['Authorization']
     if (!token) {
       throw new Error('Missing token')
@@ -40,11 +44,14 @@ module.exports.incident = async (event) => {
     }
     try {
       // validate the token from the request
-      // const decoded = await firebaseTokenVerifier.validate(token, projectId)
+      const user = await firebaseTokenVerifier.validate(token, projectId)
        // user is now confirmed to be authorized, return the data
-      const results = await docClient.scan({
+      const results = await docClient.query({
         TableName: "incident-list",
-        Limit:10,
+        KeyConditionExpression: "user_key = :user_key",
+        ExpressionAttributeValues: {
+        ":user_key": user.sub,
+        },
       }).promise()
       return {
         statusCode: 200,
@@ -69,7 +76,7 @@ module.exports.incident = async (event) => {
 
   if (event.path === '/incident' && event.httpMethod === 'POST') {
     // check if the user is authenticated
-        let user;
+    let user;
     try {
       user = await checkUser(event)
     } catch (err) {
@@ -94,11 +101,13 @@ module.exports.incident = async (event) => {
 
     // const reportIncident = (userKey, requestBody) => {
         // return 
-    await docClient
+    
+    try {
+      await docClient
           .put({
             TableName: "incident-list",
             Item: {
-              userKey: user.sub,
+              user_key: user.sub,
               incidentId: uuidv4(),
               timestamp: Date.now(),
               description: requestBody.description,
@@ -106,11 +115,20 @@ module.exports.incident = async (event) => {
             },
           })
         .promise()
-      // send back a successful response
+        // send back a successful response
         return {
-            statusCode: 201,
-            headers
-        }
+          statusCode: 201,
+          headers
+      }
+    } catch (err) {
+      return {
+        statusCode: 500,
+        headers,
+        body: JSON.stringify({message: err.message})
+      }
+    }
+    
+      
     }
 
 
