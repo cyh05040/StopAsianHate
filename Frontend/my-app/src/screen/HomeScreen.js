@@ -71,13 +71,13 @@ const HomeScreen = () => {
                     </ol>
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img class="d-block w-100" src="/img/stopaapirallynyc.jpeg" alt="First slide"/>
+                            <img class="d-block w-100" src="/img/nbc.jpg" alt="First slide"/>
                         </div>
                         <div class="carousel-item">
-                            <img class="d-block w-100" src="/img/background.jpeg" alt="Second slide"/>
+                            <img class="d-block w-100" src="/img/nbc.jpg" alt="Second slide"/>
                         </div>
                         <div class="carousel-item">
-                            <img class="d-block w-100" src="/img/background.jpeg" alt="Third slide"/>
+                            <img class="d-block w-100" src="/img/nbc.jpg" alt="Third slide"/>
                         </div>
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -107,7 +107,7 @@ const HomeScreen = () => {
                 </div>
                 {/* <!-- News One Row--> */}
                 <div class="row justify-content-center no-gutters mb-5 mb-lg-0">
-                    <div class="col-lg-6"><img class="img-fluid" src="/img/wsp.png" alt="..." /></div>
+                    <div class="col-lg-6"><img class="img-fluid" src="/img/nbc.jpg" alt="..." /></div>
                     <div class="col-lg-6">
                         <div class="bg-black text-center h-100 project">
                             <div class="d-flex h-100">
@@ -123,7 +123,7 @@ const HomeScreen = () => {
                 </div>
                 {/* <!-- Project Two Row--> */}
                 <div class="row justify-content-center no-gutters">
-                    <div class="col-lg-6"><img class="img-fluid" src="/img/elderly.png" alt="..." /></div>
+                    <div class="col-lg-6"><img class="img-fluid" src="/img/nbc.jpg" alt="..." /></div>
                     <div class="col-lg-6 order-lg-first">
                         <div class="bg-black text-center h-100 project">
                             <div class="d-flex h-100">
