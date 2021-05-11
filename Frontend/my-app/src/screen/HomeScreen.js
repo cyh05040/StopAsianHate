@@ -380,7 +380,7 @@ class SignInScreen extends React.Component {
         console.log(idToken)
         try
         {
-            const response = await fetch('https://e5ieav3xua.execute-api.us-east-1.amazonaws.com/dev/incident', {
+            const response = await fetch('https://e5ieav3xua.execute-api.us-east-1.amazonaws.com/dev/incident ', {
                 headers: {
                     'Authorization': idToken
                 }
@@ -389,6 +389,7 @@ class SignInScreen extends React.Component {
             return console.log('unauthorized')
             } else {
                 const data = await response.json()
+                console.log(data.zipcode)
                 // save it to your components state so you can use it during render
                 this.setState({
                     zipcode:data.zipcode,
