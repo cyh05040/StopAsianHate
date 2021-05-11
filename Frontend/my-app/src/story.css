@@ -120,13 +120,6 @@ hr.hr-text {
     }
 }
 
-html {
-    font-family: sans-serif;
-    line-height: 1.15;
-    -webkit-text-size-adjust: 100%;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
 body {
     margin: 0;
     font-family: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -138,21 +131,17 @@ body {
     background-color: #fff;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.h1,
-.h2,
-.h3,
-.h4,
-.h5,
-.h6 {
-    font-family: orpheuspro, serif;
-    font-style: normal;
+h1 {
+    font-family: orpheuspro;
     font-weight: 500;
     margin-bottom: 0.5rem;
     line-height: 1.2;
+}
+
+@font-face {
+    font-family: "orpheuspro";
+    src: url("https://use.typekit.net/af/06e5a6/00000000000000007735a59d/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff2"), url("https://use.typekit.net/af/06e5a6/00000000000000007735a59d/30/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff"), url("https://use.typekit.net/af/06e5a6/00000000000000007735a59d/30/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("opentype");
+    font-display: auto;
+    font-style: normal;
+    font-weight: 400;
 }

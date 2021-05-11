@@ -7,6 +7,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const StoryScreen = () => {
     return (
         <div class="gradient-bg-color">
+            <style>
+                @import url("https://use.typekit.net/jyt8jsq.css");
+            </style>
             {/* navbar */}
             <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="storyNav">
                 <div class="container">
