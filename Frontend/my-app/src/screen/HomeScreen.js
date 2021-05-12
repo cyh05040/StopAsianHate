@@ -1,14 +1,64 @@
-import React from 'react';
+import React , { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import firebase from 'firebase';
-// import { incident } from '../../../../Backend/my-app-serverless/handler';
+import Carousel from 'react-gallery-carousel';
+import 'react-gallery-carousel/dist/index.css';
+
+const images = [
+    {
+        src: `/img/rally1.jpg`, // required
+    },
+    {
+    src: `/img/rally2.jpg`, // required
+    },
+    {
+    src: `/img/rally3.jpg`, // required
+    },
+    {
+    src: `/img/rally4.jpg`, // required
+    },
+    {
+    src: `/img/rally5.jpg`, // required
+    },
+    {
+    src: `/img/rally6.jpg`, // required
+    },
+    {
+    src: `/img/rally7.jpg`, // required
+    },
+    {
+    src: `/img/rally8.jpg`, // required
+    },
+    {
+    src: `/img/rally9.jpg`, // required
+    },
+    {
+    src: `/img/rally10.jpg`, // required
+    },
+    {
+    src: `/img/rally11.jpg`, // required
+    },
+    {
+    src: `/img/rally12.jpg`, // required
+    },
+    {
+    src: `/img/rally13.jpg`, // required
+    },
+    {
+    src: `/img/rally14.jpg`, // required
+    },
+    {
+    src: `/img/rally15.jpg`, // required
+    }
+]
 
 
 
 const HomeScreen = () => {
+
     return (
         <body id="page-top">
         {/* <!-- Navigation--> */}
@@ -55,7 +105,7 @@ const HomeScreen = () => {
                             April 1, 2021
                         </div>
                         <div class="text-white-50">
-                            <a href="https://nani.today/">Nani.Today</a>
+                    
                         </div>
                         <div class="text-white-50">
                             New York politicians and residents gather in a rally to stop anti-Asian violence in Midtown Manhattan and Chinatown
@@ -63,32 +113,7 @@ const HomeScreen = () => {
                     </div>
                 </div>
                 {/* <img class="img-fluid" src="/img/background.png" alt="..." /> */}
-                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                    </ol>
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img class="d-block w-100" src="/img/nbc.jpg" alt="First slide"/>
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-block w-100" src="/img/nbc.jpg" alt="Second slide"/>
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-block w-100" src="/img/nbc.jpg" alt="Third slide"/>
-                        </div>
-                    </div>
-                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                </div>
+                <Carousel images={images} style={{ height: 800, width:'100%' }} />
             </div>
         </section>
         {/* <!-- News--> */}
@@ -107,14 +132,14 @@ const HomeScreen = () => {
                 </div>
                 {/* <!-- News One Row--> */}
                 <div class="row justify-content-center no-gutters mb-5 mb-lg-0">
-                    <div class="col-lg-6"><img class="img-fluid" src="/img/nbc.jpg" alt="..." /></div>
+                    <div class="col-lg-6"><img class="img-fluid" src="/img/wsj.jpg" alt="..." /></div>
                     <div class="col-lg-6">
                         <div class="bg-black text-center h-100 project">
                             <div class="d-flex h-100">
                                 <div class="project-text w-100 my-auto text-center text-lg-left">
-                                    <h4 class="text-white">Washington Post</h4>
-                                    <p class="mb-0 text-white-50">Woman Charged With Hate Crime and Battery For Using Racial Slurs, Spitting on Asian</p>
-                                    <div class="text-white"><a href="https://www.washingtonpost.com/nation/2021/03/09/california-woman-charged-hatecrime-asianamerican/">Read more...</a></div>
+                                    <h4 class="text-white">The Wall Street Journal</h4>
+                                    <p class="mb-0 text-white-50">After Anti-Asian Violence, Volunteers Take to Streets to Form Patrols</p>
+                                    <div class="text-white"><a href="https://www.wsj.com/articles/volunteers-take-to-streets-to-form-patrols-after-anti-asian-attacks-11616594481">Read more...</a></div>
                                     <hr class="d-none d-lg-block mb-0 ml-0" />
                                 </div>
                             </div>
@@ -123,14 +148,14 @@ const HomeScreen = () => {
                 </div>
                 {/* <!-- Project Two Row--> */}
                 <div class="row justify-content-center no-gutters">
-                    <div class="col-lg-6"><img class="img-fluid" src="/img/nbc.jpg" alt="..." /></div>
+                    <div class="col-lg-6"><img class="img-fluid" src="/img/Nextshark.jpg" alt="..." /></div>
                     <div class="col-lg-6 order-lg-first">
                         <div class="bg-black text-center h-100 project">
                             <div class="d-flex h-100">
                                 <div class="project-text w-100 my-auto text-center text-lg-right">
-                                    <h4 class="text-white">New York Times</h4>
-                                    <p class="mb-0 text-white-50">Elderly Asian Man Left Brain Dead After Violent Robbery in Oakland</p>
-                                    <div class="text-white"><a href="nytimes.com/2021/02/27/us/asian-american-hate-crimes.html">Read more...</a></div>
+                                    <h4 class="text-white">Next Shark</h4>
+                                    <p class="mb-0 text-white-50">Asian Sixth Grader Allegedly Punched, Called ‘Covid Starter’ in NY</p>
+                                    <div class="text-white"><a href="https://nextshark.com/asian-sixth-grader-allegedly-punched-called-covid-starter-in-ny/">Read more...</a></div>
                                     <hr class="d-none d-lg-block mb-0 mr-0" />
                                 </div>
                             </div>
@@ -293,20 +318,6 @@ class Incident extends React.Component {
             
             <div></div>
         </div>
-
-            // <div>
-        //   <ul>
-        //   {
-        //     this.state.incidents && this.state.incidents.Items.map((item, index) => {
-        //       return (
-        //             <li class="text-white-50" key={index}>
-        //                 {item.description} from {item.userKey} on {item.index}
-        //             </li>
-        //       );
-        //     })
-        //   }
-        //   </ul>
-        // </div>
       )
     }
   };
@@ -440,8 +451,6 @@ class SignInScreen extends React.Component {
       );
     }
   }
-  
-
 
 
 export default HomeScreen
