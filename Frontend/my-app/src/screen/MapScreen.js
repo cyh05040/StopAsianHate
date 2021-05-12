@@ -1,32 +1,24 @@
 import React, {Component} from 'react';
-import GoogleMapReact from 'google-map-react';
 import { Link } from 'react-router-dom';
 
-import Marker from '../components/Marker';
 import GoogleMap from '../components/GoogleMap';
 
-// const Markers = myData.map( (data) => {
-//     return (
-//         <Marker
-//             lat={data.lat}
-//             lng={data.lng}
-//             text={data.Title}
-//         />
-//     )
-// });
+const types_discrimination = {
+	VERBAL: "Verbal Harassment/Name Calling",
+	PHYSICAL: "Physical Assault",
+	COUGH: "Coughed At/Spat Upon"
+}
+
 
 const getInfoWindowString = (place) => `
     <div>
-        <div style="font-size: 14px;">
-            <a href=${[place.Url]}>
-            ${place.Title}
-            </a>
+        <div style="font-size: small;" id="info-title">
+            <a href=${[place.Url]}>${place.Title}</a>
         </div>
-        </div>
-        <div style="font-size: 12px; color: grey;">
-            ${place.Date}
-            <br />
-            ${place.Type}
+        <br />
+        <div style="font-size: x-small; color: grey;">
+            <div id="info-date">${place.Date}</div>
+            <div id="info-type">Type of Discrimination: ${types_discrimination[place.Type]}</div>
         </div>
     </div>`;
 
@@ -45,13 +37,17 @@ const apiIsLoaded = (map, maps, places) => {
     }));
 
     infowindows.push(new maps.InfoWindow({
-        content: getInfoWindowString(place),
+            content: getInfoWindowString(place),
+            maxWidth: 400,
         }));
     });
 
     markers.forEach((marker, i) => {
         marker.addListener('click', () => {
-        infowindows[i].open(map, marker);
+            for (var j = 0; j < infowindows.length; j++ ) {
+                infowindows[j].close();
+            }
+            infowindows[i].open(map, marker);
         });
     });
 };
@@ -69,9 +65,6 @@ class SimpleMap extends Component {
         fetch('nextshark_data.json')
             .then((response) => response.json())
             .then((data) => {
-                // data.forEach((result) => {
-                //     result.show = false; // eslint-disable-line no-param-reassign
-                // });
                 this.setState({ places: data });
             });
     }
@@ -109,7 +102,7 @@ class SimpleMap extends Component {
                     </div>
                 </div>
             </nav>
-            <div style={{ height: '95vh', width: '100%' }}>
+            <div id="map" style={{ height: '80vh', width: '100%' }}>
                 <GoogleMap
                     defaultZoom={11}
                     defaultCenter={[40.712775,-74.005973]}
