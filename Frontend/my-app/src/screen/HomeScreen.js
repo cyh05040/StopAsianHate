@@ -7,56 +7,6 @@ import firebase from 'firebase';
 import Carousel from 'react-gallery-carousel';
 import 'react-gallery-carousel/dist/index.css';
 
-const images = [
-    {
-        src: `/img/rally1.jpg`, // required
-    },
-    {
-    src: `/img/rally2.jpg`, // required
-    },
-    {
-    src: `/img/rally3.jpg`, // required
-    },
-    {
-    src: `/img/rally4.jpg`, // required
-    },
-    {
-    src: `/img/rally5.jpg`, // required
-    },
-    {
-    src: `/img/rally6.jpg`, // required
-    },
-    {
-    src: `/img/rally7.jpg`, // required
-    },
-    {
-    src: `/img/rally8.jpg`, // required
-    },
-    {
-    src: `/img/rally9.jpg`, // required
-    },
-    {
-    src: `/img/rally10.jpg`, // required
-    },
-    {
-    src: `/img/rally11.jpg`, // required
-    },
-    {
-    src: `/img/rally12.jpg`, // required
-    },
-    {
-    src: `/img/rally13.jpg`, // required
-    },
-    {
-    src: `/img/rally14.jpg`, // required
-    },
-    {
-    src: `/img/rally15.jpg`, // required
-    }
-]
-
-
-
 const HomeScreen = () => {
 
     return (
@@ -235,6 +185,54 @@ const HomeScreen = () => {
 
     )
 }
+
+const images = [
+    {
+        src: `/img/rally1.jpg`, // required
+    },
+    {
+    src: `/img/rally2.jpg`, // required
+    },
+    {
+    src: `/img/rally3.jpg`, // required
+    },
+    {
+    src: `/img/rally4.jpg`, // required
+    },
+    {
+    src: `/img/rally5.jpg`, // required
+    },
+    {
+    src: `/img/rally6.jpg`, // required
+    },
+    {
+    src: `/img/rally7.jpg`, // required
+    },
+    {
+    src: `/img/rally8.jpg`, // required
+    },
+    {
+    src: `/img/rally9.jpg`, // required
+    },
+    {
+    src: `/img/rally10.jpg`, // required
+    },
+    {
+    src: `/img/rally11.jpg`, // required
+    },
+    {
+    src: `/img/rally12.jpg`, // required
+    },
+    {
+    src: `/img/rally13.jpg`, // required
+    },
+    {
+    src: `/img/rally14.jpg`, // required
+    },
+    {
+    src: `/img/rally15.jpg`, // required
+    }
+]
 
 // Configure Firebase.
 const config = {
@@ -423,8 +421,7 @@ class SignInScreen extends React.Component {
       return (
         <div>
             <p class="text-white-50">Welcome {firebase.auth().currentUser.displayName}! You are now signed-in!</p>
-            <p class="text-white-50">Your email is {firebase.auth().currentUser.email}</p>
-            <p class="text-white-50">Your token is {this.state.data}</p>
+            {/* <p class="text-white-50">Your email is {firebase.auth().currentUser.email}</p> */}
             <button onClick={() => firebase.auth().signOut()} class="btn btn-secondary mx-auto" type="submit">
                 <a>Sign-out</a>
             </button>
