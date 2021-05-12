@@ -1,4 +1,4 @@
-#story-top-padding {
+.story-top-padding {
     padding-top: 18em;
     padding-bottom: 10em;
 }
@@ -19,14 +19,15 @@
 }
 
 .paragraph-padding {
-    padding-bottom: 5em;
+    padding-bottom: 4em;
 }
 
 hr.hr-text {
     position: relative;
     border: none;
-    height: 1px;
+    height: 0.5px;
     background: #999;
+    width: 80%;
 }
 
 #storyNav {
@@ -131,7 +132,10 @@ body {
     background-color: #fff;
 }
 
-h1 {
+#story h1,
+#story h2,
+#story h3,
+#story h4 {
     font-family: orpheuspro;
     font-weight: 500;
     margin-bottom: 0.5rem;
@@ -144,4 +148,12 @@ h1 {
     font-display: auto;
     font-style: normal;
     font-weight: 400;
+}
+
+#story p {
+    font-size: 110%;
+}
+
+#story li {
+    font-size: 110%;
 }
