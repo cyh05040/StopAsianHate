@@ -1,9 +1,13 @@
 const AWS = require("aws-sdk");
-const { v4: uuidv4 } = require("uuid");
+const { v4: uuidv4 } = require('uuid');
+
+
 const docClient = new AWS.DynamoDB.DocumentClient();
 const headers = {
-  'Access-Control-Allow-Origin': '*'
+  'Access-Control-Allow-Origin': '*',
+  "Access-Control-Allow-Methods": "OPTIONS,POST,GET, ..."
   }
+  
 
 
 const checkUser = async (event) => {
