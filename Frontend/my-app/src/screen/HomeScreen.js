@@ -247,210 +247,210 @@ const config = {
     appId: "1:131938165564:web:7e8b3d00d87cd85820b439",
     measurementId: "G-PTZSVBQ7CB"
   };
-// Initialize Firebase
-if (firebase.apps.length === 0) {
-    firebase.initializeApp(config);
-  }   
+// // Initialize Firebase
+// if (firebase.apps.length === 0) {
+//     firebase.initializeApp(config);
+//   }   
 
-class Incident extends React.Component {
-    state = {
-        incidents: null,
-    }
+// class Incident extends React.Component {
+//     state = {
+//         incidents: null,
+//     }
 
-    async componentDidMount() {
-        this.getIncidentList();
-    }
+//     async componentDidMount() {
+//         this.getIncidentList();
+//     }
     
 
-    async getIncidentList(){
-        const idToken = await firebase.auth().currentUser?.getIdToken()
-        // console.log(idToken)
-        try
-        {
-            const response = await fetch('https://e5ieav3xua.execute-api.us-east-1.amazonaws.com/dev/incident', {
-                // method: "GET",
-                headers: {
-                    'Authorization': idToken
-                }
-            });
-            if (response.status === 401){
-            return console.log('unauthorized')
-            } else {
-                const data = await response.json()
-                // save it to your components state so you can use it during render
-                this.setState({
-                    incidents:data
-                });
-            }
-        } catch (err) {
-            console.error(err)
-        }
-    }
+//     async getIncidentList(){
+//         const idToken = await firebase.auth().currentUser?.getIdToken()
+//         // console.log(idToken)
+//         try
+//         {
+//             const response = await fetch('https://e5ieav3xua.execute-api.us-east-1.amazonaws.com/dev/incident', {
+//                 // method: "GET",
+//                 headers: {
+//                     'Authorization': idToken
+//                 }
+//             });
+//             if (response.status === 401){
+//             return console.log('unauthorized')
+//             } else {
+//                 const data = await response.json()
+//                 // save it to your components state so you can use it during render
+//                 this.setState({
+//                     incidents:data
+//                 });
+//             }
+//         } catch (err) {
+//             console.error(err)
+//         }
+//     }
   
-    render() {
-      return (
-        <div>
-            <br></br>
-            <h2 class="text-white mb-5">All Incidents</h2>
-            {/* <ul>
-                {
-                    this.state.incidents.map(incident => {
-                        return(
-                        <li>
-                            Incident Description: {incident.description}
-                            Zip Code: {incident.zipcode}
-                        </li>
-                        );
-                    })
-                }
-            </ul> */}
-            <ul>
-            {
-                this.state.incidents && this.state.incidents.Items.map((item, index) => {
-                return (
-                        <li class="text-white-50" key={index}>
-                            <div>What happened: {item.description}</div>
-                            <div> Zipcode: {item.zipcode}</div>
-                        </li>
-                );
-                })
-            }
-            </ul>
+//     render() {
+//       return (
+//         <div>
+//             <br></br>
+//             <h2 class="text-white mb-5">All Incidents</h2>
+//             {/* <ul>
+//                 {
+//                     this.state.incidents.map(incident => {
+//                         return(
+//                         <li>
+//                             Incident Description: {incident.description}
+//                             Zip Code: {incident.zipcode}
+//                         </li>
+//                         );
+//                     })
+//                 }
+//             </ul> */}
+//             <ul>
+//             {
+//                 this.state.incidents && this.state.incidents.Items.map((item, index) => {
+//                 return (
+//                         <li class="text-white-50" key={index}>
+//                             <div>What happened: {item.description}</div>
+//                             <div> Zipcode: {item.zipcode}</div>
+//                         </li>
+//                 );
+//                 })
+//             }
+//             </ul>
             
-            <div></div>
-        </div>
-      )
-    }
-  };
+//             <div></div>
+//         </div>
+//       )
+//     }
+//   };
   
 
-class SignInScreen extends React.Component {
-    // The component's Local state.
-    state = {
-      isSignedIn: false, // Local signed-in state.
-      zipcode: null,
-      description: null,
-    };
+// class SignInScreen extends React.Component {
+//     // The component's Local state.
+//     state = {
+//       isSignedIn: false, // Local signed-in state.
+//       zipcode: null,
+//       description: null,
+//     };
    
-    // Configure FirebaseUI.
-    uiConfig = {
-      // Popup signin flow rather than redirect flow.
-      signInFlow: 'popup',
-      // We will display Google and Facebook as auth providers.
-      signInOptions: [
-        firebase.auth.EmailAuthProvider.PROVIDER_ID
-      ],
-      callbacks: {
-        // Avoid redirects after sign-in.
-        signInSuccessWithAuthResult: () => false
-      }
-    };
+//     // Configure FirebaseUI.
+//     uiConfig = {
+//       // Popup signin flow rather than redirect flow.
+//       signInFlow: 'popup',
+//       // We will display Google and Facebook as auth providers.
+//       signInOptions: [
+//         firebase.auth.EmailAuthProvider.PROVIDER_ID
+//       ],
+//       callbacks: {
+//         // Avoid redirects after sign-in.
+//         signInSuccessWithAuthResult: () => false
+//       }
+//     };
   
-    // Listen to the Firebase Auth state and set the local state.
-    componentDidMount() {
-      this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(
-          (user) => this.setState({isSignedIn: !!user})
-      );
+//     // Listen to the Firebase Auth state and set the local state.
+//     componentDidMount() {
+//       this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(
+//           (user) => this.setState({isSignedIn: !!user})
+//       );
 
-      this.refreshIncidentList();
-    }
+//       this.refreshIncidentList();
+//     }
   
-    // Make sure we un-register Firebase observers when the component unmounts.
-    componentWillUnmount() {
-      this.unregisterAuthObserver();
-    }
+//     // Make sure we un-register Firebase observers when the component unmounts.
+//     componentWillUnmount() {
+//       this.unregisterAuthObserver();
+//     }
 
     
-    async postIncident(event) {
-        const idToken = await firebase.auth().currentUser?.getIdToken()
-        console.log(idToken)
-        try
-        {
-            const response = await fetch('https://e5ieav3xua.execute-api.us-east-1.amazonaws.com/dev/incident', {
-                method: "POST",
-                headers: {
-                    'Authorization': idToken
-                },
-                body: JSON.stringify({
-                    zipcode: this.state.zipcode,
-                    description: this.state.description,
-                })
-            });
-            debugger
-            if (response.status === 401){
-            return console.log('unauthorized')
-            } else {
-                this.refreshIncidentList();
-            }
-        } catch (err) {
-            console.error(err)
-        }
-    }
+//     async postIncident(event) {
+//         const idToken = await firebase.auth().currentUser?.getIdToken()
+//         console.log(idToken)
+//         try
+//         {
+//             const response = await fetch('https://e5ieav3xua.execute-api.us-east-1.amazonaws.com/dev/incident', {
+//                 method: "POST",
+//                 headers: {
+//                     'Authorization': idToken
+//                 },
+//                 body: JSON.stringify({
+//                     zipcode: this.state.zipcode,
+//                     description: this.state.description,
+//                 })
+//             });
+//             debugger
+//             if (response.status === 401){
+//             return console.log('unauthorized')
+//             } else {
+//                 this.refreshIncidentList();
+//             }
+//         } catch (err) {
+//             console.error(err)
+//         }
+//     }
 
-    async refreshIncidentList(){
-        const idToken = await firebase.auth().currentUser?.getIdToken()
-        console.log(idToken)
-        try
-        {
-            const response = await fetch('https://e5ieav3xua.execute-api.us-east-1.amazonaws.com/dev/incident ', {
-                headers: {
-                    'Authorization': idToken
-                }
-            });
-            if (response.status === 401){
-            return console.log('unauthorized')
-            } else {
-                const data = await response.json()
-                console.log(data.zipcode)
-                // save it to your components state so you can use it during render
-                this.setState({
-                    zipcode:data.zipcode,
-                    description:data.description,
-                });
-            }
-        } catch (err) {
-            console.error(err)
-        }
-    }
+//     async refreshIncidentList(){
+//         const idToken = await firebase.auth().currentUser?.getIdToken()
+//         console.log(idToken)
+//         try
+//         {
+//             const response = await fetch('https://e5ieav3xua.execute-api.us-east-1.amazonaws.com/dev/incident ', {
+//                 headers: {
+//                     'Authorization': idToken
+//                 }
+//             });
+//             if (response.status === 401){
+//             return console.log('unauthorized')
+//             } else {
+//                 const data = await response.json()
+//                 console.log(data.zipcode)
+//                 // save it to your components state so you can use it during render
+//                 this.setState({
+//                     zipcode:data.zipcode,
+//                     description:data.description,
+//                 });
+//             }
+//         } catch (err) {
+//             console.error(err)
+//         }
+//     }
    
-    render() {
-      if (!this.state.isSignedIn) {
-        return (
-          <div>
-            <StyledFirebaseAuth uiCallback={ui => ui.disableAutoSignIn()} uiConfig={this.uiConfig} firebaseAuth={firebase.auth()}/>
-          </div>
-        );
-      }
-      return (
-        <div>
-            <p class="text-white-50">Welcome {firebase.auth().currentUser.displayName}! You are now signed-in!</p>
-            {/* <p class="text-white-50">Your email is {firebase.auth().currentUser.email}</p> */}
-            <button onClick={() => firebase.auth().signOut()} class="btn btn-secondary mx-auto" type="submit">
-                <a>Sign-out</a>
-            </button>
-            <div>
-                <br></br>
-                <form>
-                    <label  class="text-white-50">
-                        Zip Code:
-                        <input type="text" value={this.state.value} onChange={
-                            (event) => this.setState({ zipcode: event.target.value })
-                        } />
-                    </label >
-                    <label  class="text-white-50">
-                        Description:
-                        <input type="text" value={this.state.value} onChange={
-                            (event) => this.setState({ description: event.target.value })
-                        } />
-                    </label>
-                    <button onClick={ () => this.postIncident()}>Submit</button>
-                </form>
-            </div>
-            <Incident />
-        </div>
-      );
-    }
-  }
+//     render() {
+//       if (!this.state.isSignedIn) {
+//         return (
+//           <div>
+//             <StyledFirebaseAuth uiCallback={ui => ui.disableAutoSignIn()} uiConfig={this.uiConfig} firebaseAuth={firebase.auth()}/>
+//           </div>
+//         );
+//       }
+//       return (
+//         <div>
+//             <p class="text-white-50">Welcome {firebase.auth().currentUser.displayName}! You are now signed-in!</p>
+//             {/* <p class="text-white-50">Your email is {firebase.auth().currentUser.email}</p> */}
+//             <button onClick={() => firebase.auth().signOut()} class="btn btn-secondary mx-auto" type="submit">
+//                 <a>Sign-out</a>
+//             </button>
+//             <div>
+//                 <br></br>
+//                 <form>
+//                     <label  class="text-white-50">
+//                         Zip Code:
+//                         <input type="text" value={this.state.value} onChange={
+//                             (event) => this.setState({ zipcode: event.target.value })
+//                         } />
+//                     </label >
+//                     <label  class="text-white-50">
+//                         Description:
+//                         <input type="text" value={this.state.value} onChange={
+//                             (event) => this.setState({ description: event.target.value })
+//                         } />
+//                     </label>
+//                     <button onClick={ () => this.postIncident()}>Submit</button>
+//                 </form>
+//             </div>
+//             <Incident />
+//         </div>
+//       );
+//     }
+//   }
 
 
 export default HomeScreen

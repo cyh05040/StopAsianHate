@@ -102,7 +102,7 @@ class SimpleMap extends Component {
                     </div>
                 </div>
             </nav>
-            <div id="map" style={{ height: '90%', width: '100%',   
+            <div id="map" style={{ height: '95%', width: '100%',   
                                 justifyContent: 'center',
                                 alignItems: 'center',
                                 position: 'absolute', 
