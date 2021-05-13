@@ -102,7 +102,11 @@ class SimpleMap extends Component {
                     </div>
                 </div>
             </nav>
-            <div id="map" style={{ height: '80vh', width: '100%' }}>
+            <div id="map" style={{ height: '90vh', width: '100%',   
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                position: 'absolute', 
+                                bottom: 0, }}>
                 <GoogleMap
                     defaultZoom={11}
                     defaultCenter={[40.712775,-74.005973]}
