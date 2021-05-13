@@ -153,4 +153,3 @@ functions:
 plugins:
   - serverless-dynamodb-local
   - serverless-offline
-

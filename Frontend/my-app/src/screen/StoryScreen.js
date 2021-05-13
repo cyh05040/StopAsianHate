@@ -16,14 +16,14 @@ const StoryScreen = () => {
                     <div class="collapse navbar-collapse" id="navbarResponsive">
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item">
-                                <Link to={'/map'}><a class="nav-link" >Map</a></Link>
+                                <Link to={'/'}><a class="nav-link" >Home</a></Link>
                             </li>
-                            <li class="nav-item">
+                            {/* <li class="nav-item">
                                 <Link to={'/story'}><a class="nav-link">Story</a></Link>
-                            </li>
-                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#photo">Photo</a></li>
+                            </li> */}
+                            {/* <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#photo">Photo</a></li>
                             <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#news">News</a></li>
-                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#signup">Report</a></li>
+                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#signup">Report</a></li> */}
                         </ul>
                     </div>
                 </div>

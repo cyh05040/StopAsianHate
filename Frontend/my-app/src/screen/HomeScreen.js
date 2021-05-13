@@ -51,14 +51,10 @@ const HomeScreen = () => {
                 <div class="row">
                     <div class="col-lg-8 mx-auto">
                         <h2 class="text-white mb-4">Stop AAPI Hate New York City Rally</h2>
-                        <div class="text-white-50">
+                        <h4 class="text-white-50">
                             April 1, 2021
-                        </div>
+                        </h4>
                         <div class="text-white-50">
-                    
-                        </div>
-                        <div class="text-white-50">
-                            New York politicians and residents gather in a rally to stop anti-Asian violence in Midtown Manhattan and Chinatown
                         </div>
                     </div>
                 </div>
@@ -173,7 +169,10 @@ const HomeScreen = () => {
             </div>
         </section>
         {/* <!-- Footer--> */}
-        <footer class="footer bg-black small text-center text-white-50"><div class="container">Copyright &copy; #STOPAAPIHATENYC 2021</div></footer>
+        <footer class="footer bg-black small text-center text-white-50">
+            <div class="container">Copyright &copy; #STOPAAPIHATENYC 2021</div>
+            <div class="container">We are graduate students in NYC that advocate for STOPAAPIHATE. Please join us and stop the hate.</div>
+        </footer>
         {/* <!-- Bootstrap core JS--> */}
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
