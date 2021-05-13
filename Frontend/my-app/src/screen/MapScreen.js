@@ -75,7 +75,7 @@ class SimpleMap extends Component {
         return (
         // Important! Always set the container height explicitly
         <div>
-            <nav class="navbar navbar-expand-lg navbar-light fixed-top" style={{   backgroundColor: '#EE5407', }}id="mainNav">
+            <nav class="navbar navbar-expand-lg navbar-light fixed-top" style={{   backgroundColor: '#0d3151', }}id="mainNav">
                 <div class="container">
                     <Link to={'/'}>
                         <a class="navbar-brand js-scroll-trigger">#STOPAAPIHATENYC</a>
