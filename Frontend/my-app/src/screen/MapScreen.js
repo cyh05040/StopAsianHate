@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 
 import GoogleMap from '../components/GoogleMap';
+import places from '../nextshark_data.json'
 
 const types_discrimination = {
 	VERBAL: "Verbal Harassment/Name Calling",
@@ -56,22 +57,22 @@ const apiIsLoaded = (map, maps, places) => {
 class SimpleMap extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            places: [],
-        };
+        // this.state = {
+        //     places: [],
+        // };
     }
 
-    componentDidMount() {
-        fetch('nextshark_data.json')
-            .then((response) => response.json())
-            .then((data) => {
-                this.setState({ places: data });
-            });
-    }
+    // componentDidMount() {
+    //     fetch('nextshark_data.json')
+    //         .then((response) => response.json())
+    //         .then((data) => {
+    //             this.setState({ places: data });
+    //         });
+    // }
     
 
     render() {
-        const { places } = this.state;
+        // const { places } = this.state;
         return (
         // Important! Always set the container height explicitly
         <div>
