@@ -118,11 +118,11 @@ const HomeScreen = () => {
                         <i class="far fa-paper-plane fa-2x mb-2 text-white"></i>
                         <h2 class="text-white mb-5">Report</h2>
                         <form class="form-inline d-flex">
-                            <input class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="inputEmail" type="email" placeholder="Enter what happened..." />
+                            <input class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0"  placeholder="Enter what happened..." />
                         </form>
                         <br></br>
                         <form class="form-inline d-flex">
-                            <input class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="inputEmail" type="email" placeholder="Enter location..." />
+                            <input class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0"  placeholder="Enter location..." />
                             <button class="btn btn-primary mx-auto" type="submit">Submit</button>
                         </form>
                         {/* <SignInScreen /> */}
