@@ -1,17 +1,77 @@
 import React, {Component} from 'react';
-import GoogleMapReact from 'google-map-react';
 import { Link } from 'react-router-dom';
 
+import GoogleMap from '../components/GoogleMap';
+
+const types_discrimination = {
+	VERBAL: "Verbal Harassment/Name Calling",
+	PHYSICAL: "Physical Assault",
+	COUGH: "Coughed At/Spat Upon"
+}
+
+
+const getInfoWindowString = (place) => `
+    <div>
+        <div style="font-size: small;" id="info-title">
+            <a href=${[place.Url]}>${place.Title}</a>
+        </div>
+        <br />
+        <div style="font-size: x-small; color: grey;">
+            <div id="info-date">${place.Date}</div>
+            <div id="info-type">Type of Discrimination: ${types_discrimination[place.Type]}</div>
+        </div>
+    </div>`;
+
+
+const apiIsLoaded = (map, maps, places) => {
+    const markers = [];
+    const infowindows = [];
+
+    places.forEach((place) => {
+        markers.push(new maps.Marker({
+            position: {
+                lat: place.lat,
+                lng: place.lng,
+            },
+            map,
+    }));
+
+    infowindows.push(new maps.InfoWindow({
+            content: getInfoWindowString(place),
+            maxWidth: 400,
+        }));
+    });
+
+    markers.forEach((marker, i) => {
+        marker.addListener('click', () => {
+            for (var j = 0; j < infowindows.length; j++ ) {
+                infowindows[j].close();
+            }
+            infowindows[i].open(map, marker);
+        });
+    });
+};
+
+
 class SimpleMap extends Component {
-    static defaultProps = {
-        center: {
-        lat: 59.95,
-        lng: 30.33
-        },
-        zoom: 11
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            places: [],
+        };
+    }
+
+    componentDidMount() {
+        fetch('nextshark_data.json')
+            .then((response) => response.json())
+            .then((data) => {
+                this.setState({ places: data });
+            });
+    }
+    
 
     render() {
+        const { places } = this.state;
         return (
         // Important! Always set the container height explicitly
         <div>
@@ -42,20 +102,19 @@ class SimpleMap extends Component {
                     </div>
                 </div>
             </nav>
-            <div style={{ height: '93vh', width: '100%' }}>
-                <GoogleMapReact
-                // bootstrapURLKeys={{ key: /* YOUR KEY HERE */ }}
-                defaultCenter={this.props.center}
-                defaultZoom={this.props.zoom}
-                >
-
-                </GoogleMapReact>
+            <div id="map" style={{ height: '80vh', width: '100%' }}>
+                <GoogleMap
+                    defaultZoom={11}
+                    defaultCenter={[40.712775,-74.005973]}
+                    yesIWantToUseGoogleMapApiInternals
+                    onGoogleApiLoaded={({ map, maps }) => apiIsLoaded(map, maps, places)}
+                />
             </div>
         </div>
         );
     }
 }
-   
+
 const MapScreen = () => {
     return (
         <div>
