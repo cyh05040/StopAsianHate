@@ -22,7 +22,7 @@ const HomeScreen = () => {
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <Link to={'/map'}><a class="nav-link" >Violence Map</a></Link>
+                            <Link to={'/map'}><a class="nav-link" >Hate Map</a></Link>
                         </li>
                         <li class="nav-item">
                             <Link to={'/story'}><a class="nav-link" >Story</a></Link>

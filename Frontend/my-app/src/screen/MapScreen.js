@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import GoogleMap from '../components/GoogleMap';
 import places from '../nextshark_data.json'
 
-const types_discrimination = {
+const types_hate = {
 	VERBAL: "Verbal Harassment/Name Calling",
 	PHYSICAL: "Physical Assault",
 	COUGH: "Coughed At/Spat Upon"
@@ -19,7 +19,7 @@ const getInfoWindowString = (place) => `
         <br />
         <div style="font-size: x-small; color: grey;">
             <div id="info-date">${place.Date}</div>
-            <div id="info-type">Type of Discrimination: ${types_discrimination[place.Type]}</div>
+            <div id="info-type">Type of Hate: ${types_hate[place.Type]}</div>
         </div>
     </div>`;
 
